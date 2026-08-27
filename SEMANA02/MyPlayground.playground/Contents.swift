@@ -22,8 +22,9 @@ let exafinal = Double(readLine() ?? "") ?? 0
 // Commit del ingreso de datos
 
 let promedio = (exaparcial) * parcial + (exatrabajo) * trabajo + (exafinal) * final
+let resultado = String(format: "%.2f", promedio)
 // Commit del calculo
 
 print ("Promedio final por pesos de \(alumno): \(promedio)")
+print ("Promedio final por pesos de \(alumno): \(resultado)")
 // Commit de mostrar los datos
-
