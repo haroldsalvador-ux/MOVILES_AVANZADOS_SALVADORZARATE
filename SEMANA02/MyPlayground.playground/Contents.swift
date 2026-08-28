@@ -1,30 +1,77 @@
-import UIKit
 import Foundation
 
-var greeting = "Hello, playground"
-// Definir el promedio por pesos
+//tipo de usuario
+enum TipoUsuario:String {
+    case alumno = "Amuno"
+    case docente = "Docente"
+    case administrador = "Administrador"
+}
 
-let parcial = 0.3
-let trabajo = 0.3
-let final = 0.4
+//entidad prestamo
 
-print("Nombre del Alumno")
-let alumno = readLine() ?? "Desconocido"
+struct Prestamo {
+    let tituloLibro: String
+    let tipoUsuario: TipoUsuario
+    let fechaPrestamo: Date
+    let fechaDevolucion: Date
+}
 
-print ("Nota del Examen Parcial")
-let exaparcial = Double(readLine() ?? "") ?? 0
+//ingreso de datos
 
-print ("Nota del Examen de Trabajo")
-let exatrabajo = Double(readLine() ?? "") ?? 0
+func leerFecha(_ mensaje: String) -> Date {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd/MM/yyyy"
+    formatter.locale = Locale(identifier: "es_PE")
+    
+while true {
+        print(mensaje, terminator: " ")
+        if let input = readLine(), let fecha = formatter.date(from: input) {
+            return fecha
+        }
+        print("Fecha inválida. Usa el formato dd/MM/yyyy")
+    }
+}
 
-print ("Nota del Examen Final")
-let exafinal = Double(readLine() ?? "") ?? 0
-// Commit del ingreso de datos
+func leerTipoUsuario() -> TipoUsuario {
+    print("Tipo de usuario:")
+    print("1. Alumno")
+    print("2. Docente")
+    print("3. Administrador")
 
-let promedio = (exaparcial) * parcial + (exatrabajo) * trabajo + (exafinal) * final
-let resultado = String(format: "%.2f", promedio)
-// Commit del calculo
+    while true {
+        print("Selecciona (1-3):", terminator: " ")
+        if let input = readLine() {
+            switch input {
+            case "1": return .alumno
+            case "2": return .docente
+            case "3": return .administrador
+            default: print("Opción inválida. Intenta de nuevo.")
+            }
+        }
+    }
+}
 
-print ("Promedio final por pesos de \(alumno): \(promedio)")
-print ("Promedio final por pesos de \(alumno): \(resultado)")
-// Commit de mostrar los datos
+func ingresarDatos() -> Prestamo {
+    print("=== SISTEMA DE PRÉSTAMO DE LIBROS ===\n")
+
+    print("Título del libro:", terminator: " ")
+    let titulo = readLine() ?? "Sin título"
+
+    let tipo = leerTipoUsuario()
+
+    let fechaPrestamo = leerFecha("Fecha de préstamo (dd/MM/yyyy):")
+    let fechaDevolucion = leerFecha("Fecha de devolución (dd/MM/yyyy):")
+
+    return Prestamo(
+        tituloLibro: titulo,
+        tipoUsuario: tipo,
+        fechaPrestamo: fechaPrestamo,
+        fechaDevolucion: fechaDevolucion
+    )
+}
+
+// Ejecución
+let prestamo = ingresarDatos()
+print("\nDatos ingresados correctamente.")
+print("Libro: \(prestamo.tituloLibro)")
+print("Usuario: \(prestamo.tipoUsuario.rawValue)")
