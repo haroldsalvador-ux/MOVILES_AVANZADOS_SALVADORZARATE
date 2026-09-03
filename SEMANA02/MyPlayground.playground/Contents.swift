@@ -1,15 +1,14 @@
 import Foundation
 
-// MARK: - Fase 1: Ingreso de datos
+// MARK: - 1. MODELOS DE DATOS
 
-// Tipo de Usuario
 enum TipoUsuario: String {
     case alumno = "Alumno"
     case docente = "Docente"
     case administrador = "Administrador"
+    case coordinador = "Coordinador"
 }
 
-// Entidad Prestamo
 struct Prestamo {
     let tituloLibro: String
     let tipoUsuario: TipoUsuario
@@ -18,63 +17,94 @@ struct Prestamo {
     let fechaEntregaReal: Date
 }
 
-// Días máximos por tipo
+struct FilaCalendario {
+    let dia: Int
+    let fecha: Date
+    let multaDia: Double
+    let acumulado: Double
+}
+
+// MARK: - 2. REGLAS DE NEGOCIO Y CONFIGURACIÓN
+
 func diasMaximos(_ tipo: TipoUsuario) -> Int {
     switch tipo {
     case .alumno: return 7
     case .docente: return 15
     case .administrador: return 10
+    case .coordinador: return 15
     }
 }
 
-// Leer título con validación
+func multaBase(_ tipo: TipoUsuario) -> Double {
+    switch tipo {
+    case .alumno: return 1.50
+    case .docente: return 2.00
+    case .administrador: return 3.00
+    case .coordinador: return 4.00
+    }
+}
+
+func fechaHoy() -> Date {
+    return Calendar.current.startOfDay(for: Date())
+}
+
+// MARK: - 3. MANEJO Y VALIDACIÓN DE ENTRADAS POR CONSOLA
+
 func leerTitulo() -> String {
     while true {
         print("Título del libro:", terminator: " ")
         if let input = readLine()?.trimmingCharacters(in: .whitespaces), !input.isEmpty {
             return input
         }
-        print("⚠️  El título no puede estar vacío.")
+        print("⚠️ El título no puede estar vacío.")
     }
 }
 
-// Leer tipo de usuario con validación
 func leerTipoUsuario() -> TipoUsuario {
     print("\nTipo de usuario:")
     print("1. Alumno")
     print("2. Docente")
     print("3. Administrador")
+    print("4. Coordinador")
 
     while true {
-        print("Selecciona (1-3):", terminator: " ")
+        print("Selecciona (1-4):", terminator: " ")
         if let input = readLine()?.trimmingCharacters(in: .whitespaces) {
             switch input {
             case "1": return .alumno
             case "2": return .docente
             case "3": return .administrador
-            default: print("⚠️  Opción inválida. Ingresa de nuevo.")
+            case "4": return .coordinador
+            default: print("⚠️ Opción inválida. Ingresa de nuevo.")
             }
         }
     }
 }
 
-// Leer fecha con validación de formato
-func leerFecha(_ mensaje: String) -> Date {
+func leerFechaPrestamo() -> Date {
     let formatter = DateFormatter()
     formatter.dateFormat = "dd/MM/yyyy"
     formatter.locale = Locale(identifier: "es_PE")
 
+    let hoy = fechaHoy()
+
     while true {
-        print(mensaje, terminator: " ")
+        print("\nFecha de préstamo (dd/MM/yyyy):", terminator: " ")
         if let input = readLine()?.trimmingCharacters(in: .whitespaces),
            let fecha = formatter.date(from: input) {
+
+            let fechaSinHora = Calendar.current.startOfDay(for: fecha)
+
+            if fechaSinHora < hoy {
+                print("⚠️ No puedes registrar préstamos con fechas anteriores a hoy (\(formatter.string(from: hoy))).")
+                continue
+            }
             return fecha
         }
-        print("⚠️  Fecha inválida. Usa el formato dd/MM/yyyy (ej: 18/10/2026)")
+        print("⚠️ Fecha inválida. Usa el formato dd/MM/yyyy")
     }
 }
 
-// Leer fecha devolución con validaciones
 func leerFechaDevolucion(fechaPrestamo: Date, tipo: TipoUsuario) -> Date {
     let formatter = DateFormatter()
     formatter.dateFormat = "dd/MM/yyyy"
@@ -84,25 +114,24 @@ func leerFechaDevolucion(fechaPrestamo: Date, tipo: TipoUsuario) -> Date {
     let fechaLimite = Calendar.current.date(byAdding: .day, value: maxDias, to: fechaPrestamo)!
 
     while true {
-        print("Fecha de devolución (dd/MM/yyyy):", terminator: " ")
+        print("Fecha de devolución pactada (dd/MM/yyyy):", terminator: " ")
         if let input = readLine()?.trimmingCharacters(in: .whitespaces),
            let fecha = formatter.date(from: input) {
 
             if fecha <= fechaPrestamo {
-                print("⚠️  La fecha de devolución debe ser posterior a la fecha de préstamo.")
+                print("⚠️ La fecha de devolución debe ser posterior a la de préstamo.")
                 continue
             }
             if fecha > fechaLimite {
-                print("⚠️  La fecha de devolución excede el límite permitido (\(formatter.string(from: fechaLimite))) para \(tipo.rawValue).")
+                print("⚠️ Excede el límite de \(maxDias) días permitidos para \(tipo.rawValue) (\(formatter.string(from: fechaLimite))).")
                 continue
             }
             return fecha
         }
-        print("⚠️  Fecha inválida. Usa el formato dd/MM/yyyy (ej: 18/10/2026)")
+        print("⚠️ Fecha inválida. Usa el formato dd/MM/yyyy")
     }
 }
 
-// Leer fecha entrega real con validaciones
 func leerFechaEntregaReal(fechaPrestamo: Date) -> Date {
     let formatter = DateFormatter()
     formatter.dateFormat = "dd/MM/yyyy"
@@ -114,22 +143,24 @@ func leerFechaEntregaReal(fechaPrestamo: Date) -> Date {
            let fecha = formatter.date(from: input) {
 
             if fecha < fechaPrestamo {
-                print("⚠️  La fecha de entrega real no puede ser anterior a la fecha de préstamo.")
+                print("⚠️ La fecha de entrega real no puede ser anterior a la de préstamo.")
                 continue
             }
             return fecha
         }
-        print("⚠️  Fecha inválida. Usa el formato dd/MM/yyyy (ej: 18/10/2026)")
+        print("⚠️ Fecha inválida. Usa el formato dd/MM/yyyy")
     }
 }
 
-// Ingreso de datos principal
 func ingresarDatos() -> Prestamo {
-    print("=== SISTEMA DE PRÉSTAMO DE LIBROS ===\n")
+    let formatter = DateFormatter()
+    formatter.dateFormat = "dd/MM/yyyy"
+    print("=== SISTEMA DE PRÉSTAMO DE LIBROS ===")
+    print("Fecha del sistema: \(formatter.string(from: fechaHoy()))\n")
 
     let titulo = leerTitulo()
     let tipo = leerTipoUsuario()
-    let fechaPrestamo = leerFecha("\nFecha de préstamo (dd/MM/yyyy):")
+    let fechaPrestamo = leerFechaPrestamo()
     let fechaDevolucion = leerFechaDevolucion(fechaPrestamo: fechaPrestamo, tipo: tipo)
     let fechaEntregaReal = leerFechaEntregaReal(fechaPrestamo: fechaPrestamo)
 
@@ -142,58 +173,32 @@ func ingresarDatos() -> Prestamo {
     )
 }
 
-// MARK: - Fase 2: Operaciones
+// MARK: - 4. OPERACIONES Y CÁLCULOS DE MULTAS
 
-// Fecha límite
-func calcularFechaLimite(fechaPrestamo: Date, tipo: TipoUsuario) -> Date {
-    let dias = diasMaximos(tipo)
-    return Calendar.current.date(byAdding: .day, value: dias, to: fechaPrestamo)!
-}
-
-// Días de atraso usando fecha entrega real
 func calcularDiasAtraso(fechaDevolucion: Date, fechaEntregaReal: Date) -> Int {
     let diferencia = Calendar.current.dateComponents([.day], from: fechaDevolucion, to: fechaEntregaReal)
     return max(0, diferencia.day ?? 0)
 }
 
-// Multa base por tipo
-func multaBase(_ tipo: TipoUsuario) -> Double {
-    switch tipo {
-    case .alumno: return 1.50
-    case .docente: return 2.00
-    case .administrador: return 3.00
-    }
-}
-
-// Multa por día según tramo
+// TU FUNCIÓN EXACTA DE MULTA POR DÍA
 func multaPorDia(dia: Int, tipo: TipoUsuario) -> Double {
     let base = multaBase(tipo)
     switch dia {
-    case 1...3: return base
-    case 4...6: return base * 1.5
+    case 1...3: return base * 0
+    case 4...6: return base * 1.25
+    case 7...10: return base * 1.5
     default:    return base * 2.0
     }
 }
 
-// Estado del libro
-func estadoLibro(fechaDevolucion: Date, fechaEntregaReal: Date) -> String {
-    return fechaEntregaReal >= fechaDevolucion ? "Devuelto" : "Prestado"
+func estaSuspendido(diasAtraso: Int) -> Bool {
+    return diasAtraso > 20
 }
 
-// Situación del usuario
 func situacionUsuario(diasAtraso: Int) -> String {
-    return diasAtraso > 10 ? "Suspendido" : "Habilitado"
+    return estaSuspendido(diasAtraso: diasAtraso) ? "❌ SUSPENDIDO" : "✅ HABILITADO"
 }
 
-// Estructura fila calendario
-struct FilaCalendario {
-    let dia: Int
-    let fecha: Date
-    let multaDia: Double
-    let acumulado: Double
-}
-
-// Generar calendario
 func generarCalendario(fechaDevolucion: Date, diasAtraso: Int, tipo: TipoUsuario) -> [FilaCalendario] {
     var calendario: [FilaCalendario] = []
     var acumulado: Double = 0.0
@@ -216,12 +221,12 @@ func generarCalendario(fechaDevolucion: Date, diasAtraso: Int, tipo: TipoUsuario
     return calendario
 }
 
-// Multa total
 func calcularMultaTotal(calendario: [FilaCalendario]) -> Double {
     return calendario.last?.acumulado ?? 0.0
 }
 
-// MARK: - Ejecución
+// MARK: - 5. EJECUCIÓN PRINCIPAL
+
 let prestamo = ingresarDatos()
 
 let diasAtraso = calcularDiasAtraso(
@@ -236,26 +241,34 @@ let calendario = generarCalendario(
 )
 
 let multaTotal = calcularMultaTotal(calendario: calendario)
-let estado = estadoLibro(fechaDevolucion: prestamo.fechaDevolucion, fechaEntregaReal: prestamo.fechaEntregaReal)
+let usuarioSuspendido = estaSuspendido(diasAtraso: diasAtraso)
 let situacion = situacionUsuario(diasAtraso: diasAtraso)
 
 let formatter = DateFormatter()
 formatter.dateFormat = "dd/MM/yyyy"
 formatter.locale = Locale(identifier: "es_PE")
 
-print("\n✅ Datos ingresados correctamente.")
+print("\n==========================================")
+print("📌 RESUMEN DEL PRÉSTAMO")
+print("==========================================")
 print("Libro: \(prestamo.tituloLibro)")
 print("Usuario: \(prestamo.tipoUsuario.rawValue)")
 print("Días de atraso: \(diasAtraso)")
-print("Estado libro: \(estado)")
-print("Situación usuario: \(situacion)")
+print("Situación del usuario: \(situacion)")
 
-if diasAtraso > 0 {
-    print("\nDía  Fecha        Multa día  Acumulado")
+if usuarioSuspendido {
+    print("\n------------------------------------------")
+    print("⛔ ATENCIÓN: El usuario ha superado los 20 días de atraso (\(diasAtraso) días).")
+    print("El estado del usuario pasa a SUSPENDIDO de todo préstamo de libro.")
+    print("------------------------------------------")
+} else if diasAtraso > 0 {
+    print("\n--- DETALLE DE MULTAS POR DÍA ---")
+    print("Día\tFecha\t\tMulta día\tAcumulado")
     for fila in calendario {
-        print("  \(fila.dia)    \(formatter.string(from: fila.fecha))   \(String(format: "%.2f", fila.multaDia))       \(String(format: "%.2f", fila.acumulado))")
+        print("\(fila.dia)\t\(formatter.string(from: fila.fecha))\tS/ \(String(format: "%.2f", fila.multaDia))\t\tS/ \(String(format: "%.2f", fila.acumulado))")
     }
-    print("Multa total: S/ \(String(format: "%.2f", multaTotal))")
+    print("------------------------------------------")
+    print("Multa Total a pagar: S/ \(String(format: "%.2f", multaTotal))")
 } else {
-    print("\n✅ Sin multas. Libro entregado a tiempo.")
+    print("\n✅ Sin multas. El libro fue entregado a tiempo.")
 }
