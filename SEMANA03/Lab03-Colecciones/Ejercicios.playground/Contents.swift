@@ -1,51 +1,81 @@
 // Desarrollado por: Harold Salvador Zarate
 import Foundation
 
-// ===== TODO 10: Inventario de productos =====
-var precios: [String: Double] = [:]
-var stocks: [String: Int] = [:]
+// ===== CARRITO DE COMPRAS 2.0 =====
+var nombres: [String] = []
+var precios: [Double] = []
+var cantidades: [Int] = []
 
-print("¿Cuántos productos?")
-let n = Int(readLine() ?? "") ?? 0
+// TODO 11: Pedir productos
+print("¿Cuántos productos va a comprar?")
+let totalProductos = Int(readLine() ?? "") ?? 0
 
-for i in 1...n {
+for i in 1...totalProductos {
     print("\nProducto \(i) - Nombre:")
-    let nombre = readLine() ?? ""
-    print("Precio:")
-    let precio = Double(readLine() ?? "") ?? 0
-    print("Stock:")
-    let stock = Int(readLine() ?? "") ?? 0
-    
-    precios[nombre] = precio
-    stocks[nombre] = stock
+    nombres.append(readLine() ?? "")
+    print("Precio unitario:")
+    precios.append(Double(readLine() ?? "") ?? 0)
+    print("Cantidad:")
+    cantidades.append(Int(readLine() ?? "") ?? 0)
 }
 
-// TODO: Calcular valor total (precio × stock)
-var valorTotalInventario: Double = 0.0
-
-for (producto, precio) in precios {
-    if let stock = stocks[producto] {
-        let valorProducto = precio * Double(stock)
-        valorTotalInventario += valorProducto
-    }
+// TODO 12: Calcular subtotales
+var subtotales: [Double] = []
+for i in 0..<nombres.count {
+    let sub = precios[i] * Double(cantidades[i])
+    subtotales.append(sub)
 }
 
-print("\n===== REPORTE DE INVENTARIO =====")
-print("Valor total del inventario: S/ \(valorTotalInventario)")
-
-// TODO: Mostrar productos con stock < 5
-print("\n===== PRODUCTOS CON STOCK BAJO (Menor a 5) =====")
-var hayStockBajo = false
-
-for (producto, stock) in stocks {
-    if stock < 5 {
-        if let precio = precios[producto] {
-            print("⚠️ \(producto) - Stock: \(stock) unidades - Precio: S/ \(precio)")
-            hayStockBajo = true
-        }
-    }
+// TODO 13: Total del carrito
+var totalCarrito = 0.0
+for sub in subtotales {
+    totalCarrito += sub
 }
 
-if !hayStockBajo {
-    print("No hay productos con stock bajo.")
+// TODO 14: Nombre del cliente
+print("\nNombre del cliente:")
+let cliente = readLine() ?? ""
+
+// TODO 15: Descuento
+var descPct = 0.0
+if totalCarrito >= 5000 { descPct = 0.15 }
+else if totalCarrito >= 2000 { descPct = 0.10 }
+else if totalCarrito >= 500 { descPct = 0.05 }
+
+let descuento = totalCarrito * descPct
+let totalConDesc = totalCarrito - descuento
+
+// TODO 16: IGV y total
+let igv = totalConDesc * 0.18
+let totalFinal = totalConDesc + igv
+
+// TODO 17: Categoría
+var categoria = ""
+switch Int(totalCarrito) {
+case 0..<500: categoria = "Regular"
+case 500..<2000: categoria = "Frecuente"
+case 2000..<5000: categoria = "VIP"
+default: categoria = "Premium"
 }
+
+// TODO 18: Ticket
+let sep = String(repeating: "=", count: 45)
+print("\n" + sep)
+print(" TICKET DE COMPRA 2.0")
+print(" Cliente: \(cliente) (\(categoria))")
+print(sep)
+
+for i in 0..<nombres.count {
+    print("\(nombres[i]) x\(cantidades[i]) S/. \(subtotales[i])")
+}
+
+print(sep)
+print("Subtotal: S/. \(totalCarrito)")
+if descPct > 0 {
+    print("Descuento (\(descPct * 100)%): -S/. \(descuento)")
+}
+print(String(format: "IGV (18%%): S/. %.2f", igv))
+print(sep)
+print(String(format: "TOTAL: S/. %.2f", totalFinal))
+print(sep)
+print("¡Gracias por su compra, \(cliente)!")
