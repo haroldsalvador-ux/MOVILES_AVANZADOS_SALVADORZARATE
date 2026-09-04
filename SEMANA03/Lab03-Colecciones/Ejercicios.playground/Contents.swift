@@ -1,44 +1,51 @@
 // Desarrollado por: Harold Salvador Zarate
 import Foundation
 
-// ===== TODO 8: Eliminar duplicados =====
-var numeros: [Int] = []
-print("===== TODO 8: INGRESE 8 NÚMEROS =====")
-for i in 1...8 {
-    print("Número \(i):")
-    let n = Int(readLine() ?? "") ?? 0
-    numeros.append(n)
-}
-print("Con duplicados: \(numeros)")
+// ===== TODO 10: Inventario de productos =====
+var precios: [String: Double] = [:]
+var stocks: [String: Int] = [:]
 
-// Convertimos a Set para eliminar duplicados y a Array de nuevo para ordenarlo
-let sinDuplicados = Array(Set(numeros)).sorted()
-print("Sin duplicados (ordenados): \(sinDuplicados)")
+print("¿Cuántos productos?")
+let n = Int(readLine() ?? "") ?? 0
 
-
-// ===== TODO 9: Comparar asistencia =====
-var asistenciaLunes: Set<String> = []
-print("\n===== TODO 9: ASISTENCIA LUNES =====")
-for i in 1...4 {
-    print("Nombre \(i) (Lunes):")
+for i in 1...n {
+    print("\nProducto \(i) - Nombre:")
     let nombre = readLine() ?? ""
-    asistenciaLunes.insert(nombre)
+    print("Precio:")
+    let precio = Double(readLine() ?? "") ?? 0
+    print("Stock:")
+    let stock = Int(readLine() ?? "") ?? 0
+    
+    precios[nombre] = precio
+    stocks[nombre] = stock
 }
 
-var asistenciaMartes: Set<String> = []
-print("\n===== TODO 9: ASISTENCIA MARTES =====")
-for i in 1...4 {
-    print("Nombre \(i) (Martes):")
-    let nombre = readLine() ?? ""
-    asistenciaMartes.insert(nombre)
+// TODO: Calcular valor total (precio × stock)
+var valorTotalInventario: Double = 0.0
+
+for (producto, precio) in precios {
+    if let stock = stocks[producto] {
+        let valorProducto = precio * Double(stock)
+        valorTotalInventario += valorProducto
+    }
 }
 
-// Operaciones de conjuntos
-let asistieronAmbosDias = asistenciaLunes.intersection(asistenciaMartes)
-let soloLunes = asistenciaLunes.subtracting(asistenciaMartes)
-let soloMartes = asistenciaMartes.subtracting(asistenciaLunes)
+print("\n===== REPORTE DE INVENTARIO =====")
+print("Valor total del inventario: S/ \(valorTotalInventario)")
 
-print("\n===== RESULTADOS ASISTENCIA =====")
-print("Asistieron ambos días: \(asistieronAmbosDias)")
-print("Solo asistieron el Lunes: \(soloLunes)")
-print("Solo asistieron el Martes: \(soloMartes)")
+// TODO: Mostrar productos con stock < 5
+print("\n===== PRODUCTOS CON STOCK BAJO (Menor a 5) =====")
+var hayStockBajo = false
+
+for (producto, stock) in stocks {
+    if stock < 5 {
+        if let precio = precios[producto] {
+            print("⚠️ \(producto) - Stock: \(stock) unidades - Precio: S/ \(precio)")
+            hayStockBajo = true
+        }
+    }
+}
+
+if !hayStockBajo {
+    print("No hay productos con stock bajo.")
+}
