@@ -1,104 +1,151 @@
-// Desarrollado por: Harold Salvador
-// Ejercicio 6: Gestión de Notas con IA
-import Foundation // Importa la librería fundamental para operaciones del sistema
+// Desarrollado por: Harold Salvador Zarate
+import Foundation // Importa el framework Foundation para el manejo de consola e E/S
 
-// 8. REGISTRO DE ALUMNOS Y NOTAS
+// Diccionario para almacenar los precios de los productos usando el nombre como clave
+var preciosProductos: [String: Double] = [:]
+// Diccionario para almacenar el stock disponible usando el nombre como clave
+var stocksProductos: [String: Int] = [:]
 
-// Declaración del diccionario para mapear cada alumno con sus 3 notas
-var registroAlumnos: [String: [Double]] = [:]
+// Solicita al usuario la cantidad inicial de productos a registrar
+print("¿Cuántos productos desea registrar inicialmente en el inventario?")
+// Lee el valor ingresado por consola, convierte a entero o asigna 0 por defecto
+let cantidadInicial = Int(readLine() ?? "") ?? 0
 
-// Lectura de la cantidad de alumnos a registrar desde consola
-print("¿Cuántos alumnos desea registrar?")
-let entradaCantidad = readLine() ?? "0" // Lee la entrada como String o usa "0" si es nil
-let cantidadAlumnos = Int(entradaCantidad) ?? 0 // Convierte a Int o usa 0 por defecto
-
-// Bucle para iterar y solicitar los datos de cada uno de los N alumnos
-for i in 1...cantidadAlumnos {
-    print("\n--- Registro del Alumno \(i) ---") // Imprime un encabezado por alumno
-    print("Nombre del alumno:") // Solicita el nombre
-    let nombre = readLine() ?? "Alumno\(i)" // Lee el nombre o genera un valor genérico
+// Bucle para iterar la cantidad de veces especificada por el usuario
+for i in 1...cantidadInicial {
+    // Solicita el nombre del producto actual
+    print("\nProducto \(i) - Nombre:")
+    // Captura el nombre ingresado por teclado
+    let nombre = readLine() ?? ""
     
-    var notasAlumno: [Double] = [] // Inicializa un arreglo local para guardar las 3 notas
+    // Solicita el precio del producto actual
+    print("Precio unitario (S/.):")
+    // Convierte el texto a Double o asigna 0.0 si la entrada es inválida
+    let precio = Double(readLine() ?? "") ?? 0.0
     
-    // Bucle para solicitar las 3 notas correspondientes al alumno
-    for j in 1...3 {
-        print("Ingrese la nota \(j) para \(nombre):") // Pide la nota especifica
-        let entradaNota = readLine() ?? "0" // Lee el texto ingresado
-        let nota = Double(entradaNota) ?? 0.0 // Convierte a Double o usa 0.0
-        notasAlumno.append(nota) // Agrega la nota individual al arreglo del alumno
+    // Solicita la cantidad en stock del producto
+    print("Cantidad en stock:")
+    // Convierte la entrada a Int o asigna 0 por defecto
+    let stock = Int(readLine() ?? "") ?? 0
+    
+    // Almacena el precio en el diccionario correspondiente
+    preciosProductos[nombre] = precio
+    // Almacena la cantidad en stock en el diccionario correspondiente
+    stocksProductos[nombre] = stock
+}
+
+// Variable de control para mantener activo el menú interactivo
+var continuarMenu = true
+
+// Ciclo while que mantendrá desplegado el menú hasta que el usuario decida salir
+while continuarMenu {
+    // Imprime la barra separadora superior del menú
+    print("\n" + String(repeating: "=", count: 45))
+    // Muestra el título del menú principal
+    print("        MENÚ DE GESTIÓN DE INVENTARIO")
+    // Imprime separador del menú
+    print(String(repeating: "=", count: 45))
+    // Muestra la opción 1 para listar todo el inventario
+    print("1) Ver inventario completo")
+    // Muestra la opción 2 para buscar un producto por su nombre
+    print("2) Buscar producto")
+    // Muestra la opción 3 para consultar productos con bajo stock
+    print("3) Ver productos con stock bajo (< 5)")
+    // Muestra la opción 4 para calcular el valor total acumulado del inventario
+    print("4) Calcular valor total del inventario")
+    // Muestra la opción 5 para dar por finalizado el programa
+    print("5) Salir")
+    // Imprime la barra separadora inferior
+    print(String(repeating: "-", count: 45))
+    // Pide al usuario que elija una opción
+    print("Seleccione una opción (1-5):")
+    
+    // Lee la opción seleccionada por consola
+    let opcion = readLine() ?? ""
+    
+    // Evalúa la opción elegida mediante una estructura switch
+    switch opcion {
+    case "1": // Caso 1: Ver inventario completo
+        print("\n--- INVENTARIO COMPLETO ---")
+        // Verifica si el inventario contiene productos registrados
+        if preciosProductos.isEmpty {
+            // Informa que no existen registros actualmente
+            print("El inventario se encuentra vacío.")
+        } else {
+            // Recorre el diccionario de precios obteniendo la clave (nombre) y el precio
+            for (producto, precio) in preciosProductos {
+                // Obtiene el stock correspondiente usando desenvolvimiento seguro (if let)
+                if let stock = stocksProductos[producto] {
+                    // Muestra el producto formateando su nombre, precio y cantidad en stock
+                    print(String(format: "• %-15@ | Precio: S/. %7.2f | Stock: %3d unds.", producto, precio, stock))
+                }
+            }
+        }
+        
+    case "2": // Caso 2: Buscar producto específico
+        print("\nIngrese el nombre del producto a buscar:")
+        // Lee el nombre del producto que se desea consultar
+        let busqueda = readLine() ?? ""
+        
+        // Verifica si el producto buscado existe dentro del diccionario
+        if let precio = preciosProductos[busqueda], let stock = stocksProductos[busqueda] {
+            // Imprime los datos del producto hallado en el sistema
+            print("\n✅ PRODUCTO ENCONTRADO:")
+            print("Nombre: \(busqueda)")
+            print(String(format: "Precio: S/. %.2f", precio))
+            print("Stock disponible: \(stock) unidades")
+        } else {
+            // Muestra mensaje de error si el producto no se encuentra registrado
+            print("\n❌ El producto '\(busqueda)' no existe en el inventario.")
+        }
+        
+    case "3": // Caso 3: Alerta de productos con stock bajo
+        print("\n--- ALERTA DE STOCK BAJO (< 5 unidades) ---")
+        // Variable bandera para rastrear si se encontró algún producto en estado crítico
+        var hayStockBajo = false
+        
+        // Recorre todos los productos evaluando sus cantidades en stock
+        for (producto, stock) in stocksProductos {
+            // Evalúa si el stock del producto actual es menor a 5 unidades
+            if stock < 5 {
+                // Obtiene el precio mediante unwrapping seguro para completar el reporte
+                if let precio = preciosProductos[producto] {
+                    // Imprime la advertencia con formato
+                    print(String(format: "⚠️ %-15@ | Stock Crítico: %d unds. | Precio: S/. %.2f", producto, stock, precio))
+                    // Cambia la bandera a verdadero
+                    hayStockBajo = true
+                }
+            }
+        }
+        
+        // Si la bandera sigue siendo falsa, confirma que el almacén está abastecido
+        if !hayStockBajo {
+            print("Todos los productos cuentan con un stock adecuado (≥ 5 unidades).")
+        }
+        
+    case "4": // Caso 4: Calcular el valor total acumulado
+        print("\n--- VALOR TOTAL DEL INVENTARIO ---")
+        // Variable acumuladora para almacenar la suma total del dinero invertido
+        var valorTotal: Double = 0.0
+        
+        // Recorre el inventario para multiplicar precio por cantidad de cada producto
+        for (producto, precio) in preciosProductos {
+            // Obtiene el stock seguro del producto actual
+            if let stock = stocksProductos[producto] {
+                // Multiplica el precio unitario por el total de unidades y suma al acumulador
+                valorTotal += precio * Double(stock)
+            }
+        }
+        
+        // Muestra el importe total monetario del inventario formateado a 2 decimales
+        print(String(format: "El valor total acumulado del inventario es: S/. %.2f", valorTotal))
+        
+    case "5": // Caso 5: Salir del programa
+        print("\n¡Gracias por utilizar el sistema de inventario! Hasta luego.")
+        // Modifica la variable de control a false para romper el bucle while
+        continuarMenu = false
+        
+    default: // Manejo de entradas inválidas
+        print("\nOpción no válida. Por favor, ingrese un número del 1 al 5.")
     }
-    
-    registroAlumnos[nombre] = notasAlumno // Asocia las notas al nombre del alumno en el diccionario
-}
-
-// 9. CÁLCULO DE PROMEDIO Y CLASIFICACIÓN
-
-// Diccionario auxiliar para guardar el promedio final obtenido por cada alumno
-var promediosAlumnos: [String: Double] = [:]
-
-print("\n===== REPORTE DE NOTAS Y CLASIFICACIÓN =====") // Encabezado de la sección
-
-// Bucle para procesar los datos almacenados en el diccionario principal
-for (alumno, notas) in registroAlumnos {
-    let suma = notas.reduce(0.0, +) // Calcula la suma de las 3 notas del alumno
-    let promedio = notas.isEmpty ? 0.0 : (suma / Double(notas.count)) // Obtiene el promedio
-    promediosAlumnos[alumno] = promedio // Almacena el promedio individual
-    
-    var clasificacion = "" // Variable para guardar el resultado del switch
-    
-    // Clasificación del desempeño académico según el promedio mediante switch
-    switch Int(promedio) {
-    case 18...20: // Rango de notas para la máxima categoría
-        clasificacion = "Excelente"
-    case 15...17: // Rango para desempeño destacado
-        clasificacion = "Bueno"
-    case 13...14: // Rango mínimo para la aprobación
-        clasificacion = "Aprobado"
-    default: // Aplica para promedios menores a 13
-        clasificacion = "Desaprobado"
-    }
-    
-    // Imprime en consola los resultados individuales formateados
-    print("Alumno: \(alumno) | Notas: \(notas) | Promedio: \(promedio) | Estado: \(clasificacion)")
-}
-
-
-// 10. ESTADÍSTICAS GENERALES
-
-// Arreglo con todos los promedios recopilados para facilitar el cálculo estadístico
-let todosLosPromedios = Array(promediosAlumnos.values)
-
-// Verifica que existan datos antes de procesar cálculos generales
-if !todosLosPromedios.isEmpty {
-    let sumaGeneral = todosLosPromedios.reduce(0.0, +) // Suma de todos los promedios
-    let promedioGeneral = sumaGeneral / Double(todosLosPromedios.count) // Promedio global de la clase
-    
-    let notaMasAlta = todosLosPromedios.max() ?? 0.0 // Obtiene el promedio máximo registrado
-    let notaMasBaja = todosLosPromedios.min() ?? 0.0 // Obtiene el promedio mínimo registrado
-    
-    // Filtra los promedios aprobados (>= 13.0) para contabilizarlos
-    let cantidadAprobados = todosLosPromedios.filter { $0 >= 13.0 }.count
-    
-    // Calcula el porcentaje exacto de aprobados en base al total de alumnos
-    let porcentajeAprobados = (Double(cantidadAprobados) / Double(todosLosPromedios.count)) * 100.0
-    
-    // Imprime en consola las métricas calculadas
-    print("\n===== ESTADÍSTICAS DEL CURSO =====")
-    print("Promedio General: \(promedioGeneral)") // Muestra el promedio global
-    print("Nota Más Alta: \(notaMasAlta)") // Muestra la nota máxima alcanzada
-    print("Nota Más Baja: \(notaMasBaja)") // Muestra la nota mínima alcanzada
-    print("Porcentaje de Aprobados: \(porcentajeAprobados)%") // Muestra la efectividad del grupo
-}
-
-
-// 11. ORDENAR Y MOSTRAR POR PROMEDIO
-
-// Ordena la lista de parejas (alumno, promedio) de mayor a menor según el promedio
-let alumnosOrdenados = promediosAlumnos.sorted { $0.value > $1.value }
-
-print("\n===== RANKING DE ALUMNOS (DE MAYOR A MENOR) =====") // Encabezado de la lista ordenada
-
-// Recorre e imprime la tupla ordenada resultante
-for (posicion, tupla) in alumnosOrdenados.enumerated() {
-    print("\(posicion + 1). \(tupla.key) - Promedio: \(tupla.value)") // Muestra el puesto y datos
 }
