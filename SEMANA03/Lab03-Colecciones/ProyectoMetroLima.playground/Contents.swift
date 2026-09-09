@@ -74,7 +74,7 @@ while continuar {
         }
         print("De esas \(numeroLinea.count), actualmente \(operativas) están operativas y las demás siguen en proyecto.")
         
-        } else if opcion == 2 {
+    } else if opcion == 2 {
         print("\n===== ESTADO DE TODAS LAS LÍNEAS =====")
         for i in 0..<numeroLinea.count {
             if estadoLinea[i] == "Operativa" || estadoLinea[i] == "Operativa (Etapa 1A)" {
@@ -83,7 +83,47 @@ while continuar {
                 print("Línea \(numeroLinea[i]): \(estadoLinea[i]) - todavía sin estaciones en servicio")
             }
         }
-
+        
+    } else if opcion == 3 {
+        print("\n¿De qué línea quieres saber las estaciones? (1-6):")
+        let linea = Int(readLine() ?? "") ?? 0
+        
+        if linea == 1 {
+            print("La Línea 1 tiene \(estacionesOperativas[0]) estaciones operativas (recorrido: \(recorridoLinea[0])).")
+        } else if linea == 2 {
+            print("La Línea 2 tiene actualmente \(estacionesOperativas[1]) estaciones operativas, pero su proyecto completo contempla \(estacionesProyectadas[1]) estaciones en total.")
+        } else if linea == 3 {
+            print("La Línea 3 aún está en proyecto, todavía no tiene estaciones construidas.")
+        } else if linea == 4 {
+            print("La Línea 4 aún está en proyecto, todavía no tiene estaciones construidas.")
+        } else if linea == 5 {
+            print("La Línea 5 aún está en proyecto, todavía no tiene estaciones construidas.")
+        } else if linea == 6 {
+            print("La Línea 6 aún está en proyecto, todavía no tiene estaciones construidas.")
+        } else {
+            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
+        }
+        
+    } else if opcion == 4 {
+        print("\n¿De qué línea quieres saber con qué se cruza? (1-6):")
+        let linea = Int(readLine() ?? "") ?? 0
+        
+        if linea == 1 {
+            print("La Línea 1: \(cruceLinea[0])")
+        } else if linea == 2 {
+            print("La Línea 2: \(cruceLinea[1])")
+        } else if linea == 3 {
+            print("La Línea 3: \(cruceLinea[2])")
+        } else if linea == 4 {
+            print("La Línea 4: \(cruceLinea[3])")
+        } else if linea == 5 {
+            print("La Línea 5: \(cruceLinea[4])")
+        } else if linea == 6 {
+            print("La Línea 6: \(cruceLinea[5])")
+        } else {
+            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
+        }
+        
     } else if opcion == 6 {
         print("\n¡Gracias por usar el sistema de consultas del Metro de Lima y Callao!")
         continuar = false
