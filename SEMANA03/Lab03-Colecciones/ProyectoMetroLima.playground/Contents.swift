@@ -44,5 +44,29 @@ let cruceLinea: [String] = [
     "Aún no definido, la línea está en etapa de proyecto."
 ]
 
-// Prueba: confirmamos que los datos cargaron bien
-print("Datos cargados: \(numeroLinea.count) líneas registradas.")
+// ===== MENÚ PRINCIPAL =====
+var continuar = true
+
+print("=============================================")
+print(" METRO DE LIMA Y CALLAO - SISTEMA DE CONSULTAS")
+print("=============================================")
+
+while continuar {
+    print("\n¿Qué deseas consultar?")
+    print("1) ¿Cuántas líneas de metro tiene el Perú?")
+    print("2) Ver todas las líneas y su estado")
+    print("3) ¿Cuántas estaciones tiene una línea específica?")
+    print("4) ¿Con qué se cruza una línea específica?")
+    print("5) Ver ficha completa de una línea")
+    print("6) Salir")
+    print("Elige una opción (1-6):")
+
+    let opcion = Int(readLine() ?? "") ?? 0
+
+    if opcion == 6 {
+        print("\n¡Gracias por usar el sistema de consultas del Metro de Lima y Callao!")
+        continuar = false
+    } else {
+        print("\n(Opción \(opcion) todavía no implementada)")
+    }
+}
