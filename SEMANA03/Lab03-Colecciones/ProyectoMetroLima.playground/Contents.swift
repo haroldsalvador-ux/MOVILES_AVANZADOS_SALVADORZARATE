@@ -60,12 +60,24 @@ while continuar {
     print("5) Ver ficha completa de una línea")
     print("6) Salir")
     print("Elige una opción (1-6):")
-
+    
     let opcion = Int(readLine() ?? "") ?? 0
-
-    if opcion == 6 {
+    
+    if opcion == 1 {
+        print("\nEl Perú tiene \(numeroLinea.count) líneas de metro contempladas en la Red Básica del Metro de Lima y Callao.")
+        
+        var operativas = 0
+        for estado in estadoLinea {
+            if estado == "Operativa" || estado == "Operativa (Etapa 1A)" {
+                operativas += 1
+            }
+        }
+        print("De esas \(numeroLinea.count), actualmente \(operativas) están operativas y las demás siguen en proyecto.")
+        
+    } else if opcion == 6 {
         print("\n¡Gracias por usar el sistema de consultas del Metro de Lima y Callao!")
         continuar = false
+        
     } else {
         print("\n(Opción \(opcion) todavía no implementada)")
     }
