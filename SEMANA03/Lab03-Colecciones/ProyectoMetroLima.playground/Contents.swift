@@ -124,6 +124,24 @@ while continuar {
             print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
         }
         
+    } else if opcion == 5 {
+        print("\n¿De qué línea quieres ver la ficha completa? (1-6):")
+        let linea = Int(readLine() ?? "") ?? 0
+
+        if linea >= 1 && linea <= 6 {
+            let i = linea - 1
+            print("\n===== FICHA DE LA LÍNEA \(numeroLinea[i]) =====")
+            print("Estado: \(estadoLinea[i])")
+            print("Tipo: \(tipoLinea[i])")
+            print("Estaciones operativas: \(estacionesOperativas[i])")
+            print("Estaciones proyectadas: \(estacionesProyectadas[i])")
+            print("Kilómetros en servicio: \(kmOperativos[i])")
+            print("Recorrido: \(recorridoLinea[i])")
+            print("Cruces/conexiones: \(cruceLinea[i])")
+        } else {
+            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
+        }
+        
     } else if opcion == 6 {
         print("\n¡Gracias por usar el sistema de consultas del Metro de Lima y Callao!")
         continuar = false
