@@ -74,10 +74,20 @@ while continuar {
         }
         print("De esas \(numeroLinea.count), actualmente \(operativas) están operativas y las demás siguen en proyecto.")
         
+        } else if opcion == 2 {
+        print("\n===== ESTADO DE TODAS LAS LÍNEAS =====")
+        for i in 0..<numeroLinea.count {
+            if estadoLinea[i] == "Operativa" || estadoLinea[i] == "Operativa (Etapa 1A)" {
+                print("Línea \(numeroLinea[i]): \(estadoLinea[i]) - \(estacionesOperativas[i]) estaciones en servicio")
+            } else {
+                print("Línea \(numeroLinea[i]): \(estadoLinea[i]) - todavía sin estaciones en servicio")
+            }
+        }
+
     } else if opcion == 6 {
         print("\n¡Gracias por usar el sistema de consultas del Metro de Lima y Callao!")
         continuar = false
-        
+
     } else {
         print("\n(Opción \(opcion) todavía no implementada)")
     }
