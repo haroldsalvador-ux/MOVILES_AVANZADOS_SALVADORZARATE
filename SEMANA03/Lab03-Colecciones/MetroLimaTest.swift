@@ -26,6 +26,48 @@ struct MetroData: Codable {
     let lineas: [Linea]
 }
 
+// ===== ESTRUCTURA DE TARJETA DE TRANSPORTE =====
+
+struct TarjetaTransporte {
+    var saldo: Double = 3.00 // Saldo inicial predeterminado
+    let tarifaAdulto: Double = 1.50
+    
+    mutating func recargar(monto: Double) {
+        if monto > 0 {
+            saldo += monto
+            print("\n-----------------------------------------------------")
+            print(" [RECARGA EXITOSA]")
+            print(" Se abonó: S/ \(String(format: "%.2f", monto))")
+            print(" Nuevo saldo disponible: S/ \(String(format: "%.2f", saldo))")
+            print("-----------------------------------------------------")
+        } else {
+            print("\n [ERROR] El monto debe ser mayor a S/ 0.00")
+        }
+    }
+    
+    mutating func pasarPorMolinete() -> Bool {
+        print("\n-----------------------------------------------------")
+        print(" [ACERCANDO TARJETA AL MOLINETE...]")
+        if saldo >= tarifaAdulto {
+            saldo -= tarifaAdulto
+            print(" [BEEP!] ACCESO PERMITIDO")
+            print(" Tarifa descontada: S/ \(String(format: "%.2f", tarifaAdulto))")
+            print(" Saldo restante: S/ \(String(format: "%.2f", saldo))")
+            print("-----------------------------------------------------")
+            return true
+        } else {
+            print(" [BEEP-BEEP!] ACCESO DENEGADO - SALDO INSUFICIENTE")
+            print(" Saldo actual: S/ \(String(format: "%.2f", saldo))")
+            print(" Costo del pasaje: S/ \(String(format: "%.2f", tarifaAdulto))")
+            print(" Por favor, recarga tu tarjeta para continuar.")
+            print("-----------------------------------------------------")
+            return false
+        }
+    }
+}
+
+var miTarjeta = TarjetaTransporte()
+
 // ===== JSON HARDCODEADO =====
 
 let jsonString = """
@@ -205,8 +247,11 @@ while continuar {
     print("4) ¿Con qué se cruza una línea específica?")
     print("5) Ver ficha completa de una línea")
     print("6) planificador y gestior de viajes")
-    print("7) Salir")
-    print("Elige una opción (1-6):")
+    print("7) Consultar saldo de tarjeta de transporte")
+    print("8) Recargar mi tarjeta de trasnporte")
+    print("9) Simular cobro en molinete(pasar tarjeta)")
+    print("10) Salir")
+    print("Elige una opción (1-10):")
     
     let opcion = Int(readLine() ?? "") ?? 0
     
@@ -376,9 +421,23 @@ while continuar {
             }
         
     } else if opcion == 7 {
-            print("\n¡Gracias por usar el sistema de consultas del Metro de Lima y Callao!")
-            continuar = false
+        print("\n===== CONSULTA DE TARJETA =====")
+        print("Saldo disponible: S/ \(String(format: "%.2f", miTarjeta.saldo))")
+        print("Costo de tarifa general: S/ \(String(format: "%.2f", miTarjeta.tarifaAdulto))")
         
+    } else if opcion == 8 {
+        print("\n===== RECARGA DE TARJETA =====")
+        print("Ingresa el monto a recargar en soles (S/):")
+        let monto = Double(readLine() ?? "") ?? 0.0
+        miTarjeta.recargar(monto: monto)
+        
+    } else if opcion == 9 {
+        print("\n===== SIMULACIÓN DE COBRO (MOLINETE) =====")
+        _ = miTarjeta.pasarPorMolinete()
+        
+    } else if opcion == 10 {
+        print("\n¡Gracias por usar el sistema del Metro de Lima y Callao!")
+        continuar = false
     } else {
         print("\n(Opción \(opcion) todavía no implementada)")
     }
