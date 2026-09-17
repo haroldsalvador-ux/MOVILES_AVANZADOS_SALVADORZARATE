@@ -3,27 +3,27 @@ import Foundation
 // ===== MODELOS DE DATOS (Codable) =====
 
 struct Estacion: Codable {
-    let id: Int
-    let nombre: String
-    let referencia: String
-    let conexion: String?
+    var id: Int
+    var nombre: String
+    var referencia: String
+    var conexion: String?
 }
 
 struct Linea: Codable {
-    let numero: Int
-    let nombre: String
-    let estado: String
-    let tipo: String
-    let estacionesOperativasCount: Int
-    let estacionesProyectadasCount: Int
-    let kmOperativos: Double
-    let recorrido: String
-    let cruceGeneral: String
-    let estaciones: [Estacion]
+    var numero: Int
+    var nombre: String
+    var estado: String
+    var tipo: String
+    var estacionesOperativasCount: Int
+    var estacionesProyectadasCount: Int
+    var kmOperativos: Double
+    var recorrido: String
+    var cruceGeneral: String
+    var estaciones: [Estacion]
 }
 
 struct MetroData: Codable {
-    let lineas: [Linea]
+    var lineas: [Linea]
 }
 
 // ===== ESTRUCTURA DE TARJETA DE TRANSPORTE =====
@@ -182,55 +182,13 @@ let jsonString = """
 }
 """
 
-// Cargar y procesar el JSON en Swift
-var datosMetro: MetroData?
-if let jsonData = jsonString.data(using: .utf8) {
-    let decoder = JSONDecoder()
-    datosMetro = try? decoder.decode(MetroData.self, from: jsonData)
-}
-
-// ===== ARRAYS PARALELOS ORIGINALES (Mantenidos) =====
-
-let numeroLinea: [Int] = [1, 2, 3, 4, 5, 6]
-let estadoLinea: [String] = [
-    "Operativa",
-    "Operativa (Etapa 1A)",
-    "En proyecto",
-    "En proyecto",
-    "En proyecto",
-    "En proyecto"
-]
-
-let tipoLinea: [String] = [
-    "Elevada",
-    "Subterránea",
-    "Por definir",
-    "Por definir",
-    "Por definir",
-    "Por definir"
-]
-
-let estacionesOperativas: [Int] = [26, 5, 0, 0, 0, 0]
-let estacionesProyectadas: [Int] = [26, 27, 0, 0, 0, 0]
-let kmOperativos: [Double] = [34.6, 4.5, 0.0, 0.0, 0.0, 0.0]
-
-let recorridoLinea: [String] = [
-    "Villa El Salvador - Bayóvar (San Juan de Lurigancho)",
-    "Evitamiento - Mercado Santa Anita (tramo operativo). Proyecto completo: Ate - Callao",
-    "Por definir (línea en proyecto)",
-    "Por definir (línea en proyecto, incluye ramal al Aeropuerto Jorge Chávez)",
-    "Por definir (línea en proyecto)",
-    "Por definir (línea en proyecto)"
-]
-
-let cruceLinea: [String] = [
-    "Se conecta con el Metropolitano en la estación La Cultura. En el futuro se cruzará con la Línea 2 en la estación 28 de Julio (en construcción).",
-    "Se conecta con el Metropolitano en Estación Central. En el futuro se cruzará con la Línea 1 en la estación 28 de Julio (en construcción). Incluye el ramal hacia la Línea 4 (Aeropuerto Jorge Chávez).",
-    "Aún no definido, la línea está en etapa de proyecto.",
-    "Conectará con el Aeropuerto Jorge Chávez como ramal de la Línea 2.",
-    "Aún no definido, la línea está en etapa de proyecto.",
-    "Aún no definido, la línea está en etapa de proyecto."
-]
+// Inicializar datos en la memoria RAM
+var datosMetro: MetroData? = {
+    if let data = jsonString.data(using: .utf8) {
+        return try? JSONDecoder().decode(MetroData.self, from: data)
+    }
+    return nil
+}()
 
 // ===== MENÚ PRINCIPAL =====
 var continuar = true
@@ -250,88 +208,68 @@ while continuar {
     print("7) Consultar saldo de tarjeta de transporte")
     print("8) Recargar mi tarjeta de trasnporte")
     print("9) Simular cobro en molinete(pasar tarjeta)")
-    print("10) Salir")
-    print("Elige una opción (1-10):")
+    print("10) Modo Administrador(Agregar Linea / Estación / Ruta)")
+    print("11) Salir")
+    print("Elige una opción (1-11):")
     
     let opcion = Int(readLine() ?? "") ?? 0
     
     if opcion == 1 {
-        print("\nEl Perú tiene \(numeroLinea.count) líneas de metro contempladas en la Red Básica del Metro de Lima y Callao.")
-        
-        var operativas = 0
-        for estado in estadoLinea {
-            if estado == "Operativa" || estado == "Operativa (Etapa 1A)" {
-                operativas += 1
-            }
+        if let metro = datosMetro {
+            print("\nEl Perú tiene \(metro.lineas.count) líneas de metro contempladas en la Red Básica del Metro de Lima y Callao.")
+            let operativas = metro.lineas.filter { $0.estado.contains("Operativa") }.count
+            print("De esas \(metro.lineas.count), actualmente \(operativas) están operativas y las demás siguen en proyecto.")
         }
-        print("De esas \(numeroLinea.count), actualmente \(operativas) están operativas y las demás siguen en proyecto.")
         
     } else if opcion == 2 {
         print("\n===== ESTADO DE TODAS LAS LÍNEAS =====")
-        for i in 0..<numeroLinea.count {
-            if estadoLinea[i] == "Operativa" || estadoLinea[i] == "Operativa (Etapa 1A)" {
-                print("Línea \(numeroLinea[i]): \(estadoLinea[i]) - \(estacionesOperativas[i]) estaciones en servicio")
-            } else {
-                print("Línea \(numeroLinea[i]): \(estadoLinea[i]) - todavía sin estaciones en servicio")
+        if let metro = datosMetro {
+            for l in metro.lineas {
+                if l.estado.contains("Operativa") {
+                    print("Línea \(l.numero): \(l.estado) - \(l.estacionesOperativasCount) estaciones en servicio")
+                } else {
+                    print("Línea \(l.numero): \(l.estado) - todavía sin estaciones en servicio")
+                }
             }
         }
         
     } else if opcion == 3 {
-        print("\n¿De qué línea quieres saber las estaciones? (1-6):")
+        print("\n¿De qué línea quieres saber las estaciones?:")
         let linea = Int(readLine() ?? "") ?? 0
-        
-        if linea == 1 {
-            print("La Línea 1 tiene \(estacionesOperativas[0]) estaciones operativas (recorrido: \(recorridoLinea[0])).")
-        } else if linea == 2 {
-            print("La Línea 2 tiene actualmente \(estacionesOperativas[1]) estaciones operativas, pero su proyecto completo contempla \(estacionesProyectadas[1]) estaciones en total.")
-        } else if linea == 3 {
-            print("La Línea 3 aún está en proyecto, todavía no tiene estaciones construidas.")
-        } else if linea == 4 {
-            print("La Línea 4 aún está en proyecto, todavía no tiene estaciones construidas.")
-        } else if linea == 5 {
-            print("La Línea 5 aún está en proyecto, todavía no tiene estaciones construidas.")
-        } else if linea == 6 {
-            print("La Línea 6 aún está en proyecto, todavía no tiene estaciones construidas.")
+        if let metro = datosMetro, let l = metro.lineas.first(where: { $0.numero == linea }) {
+            if l.estacionesOperativasCount > 0 {
+                print("La \(l.nombre) tiene actualmente \(l.estacionesOperativasCount) estaciones operativas, pero su proyecto completo contempla \(l.estacionesProyectadasCount) estaciones en total.")
+            } else {
+                print("La \(l.nombre) aún está en proyecto, todavía no tiene estaciones construidas.")
+            }
         } else {
-            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
+            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas válidas.")
         }
         
     } else if opcion == 4 {
-        print("\n¿De qué línea quieres saber con qué se cruza? (1-6):")
+        print("\n¿De qué línea quieres saber con qué se cruza?:")
         let linea = Int(readLine() ?? "") ?? 0
-        
-        if linea == 1 {
-            print("La Línea 1: \(cruceLinea[0])")
-        } else if linea == 2 {
-            print("La Línea 2: \(cruceLinea[1])")
-        } else if linea == 3 {
-            print("La Línea 3: \(cruceLinea[2])")
-        } else if linea == 4 {
-            print("La Línea 4: \(cruceLinea[3])")
-        } else if linea == 5 {
-            print("La Línea 5: \(cruceLinea[4])")
-        } else if linea == 6 {
-            print("La Línea 6: \(cruceLinea[5])")
+        if let metro = datosMetro, let l = metro.lineas.first(where: { $0.numero == linea }) {
+            print("La \(l.nombre): \(l.cruceGeneral)")
         } else {
-            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
+            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas válidas.")
         }
         
     } else if opcion == 5 {
-        print("\n¿De qué línea quieres ver la ficha completa? (1-6):")
+        print("\n¿De qué línea quieres ver la ficha completa?:")
         let linea = Int(readLine() ?? "") ?? 0
 
-        if linea >= 1 && linea <= 6 {
-            let i = linea - 1
-            print("\n===== FICHA DE LA LÍNEA \(numeroLinea[i]) =====")
-            print("Estado: \(estadoLinea[i])")
-            print("Tipo: \(tipoLinea[i])")
-            print("Estaciones operativas: \(estacionesOperativas[i])")
-            print("Estaciones proyectadas: \(estacionesProyectadas[i])")
-            print("Kilómetros en servicio: \(kmOperativos[i])")
-            print("Recorrido: \(recorridoLinea[i])")
-            print("Cruces/conexiones: \(cruceLinea[i])")
+        if let metro = datosMetro, let l = metro.lineas.first(where: { $0.numero == linea }) {
+            print("\n===== FICHA DE LA LÍNEA \(l.numero) =====")
+            print("Estado: \(l.estado)")
+            print("Tipo: \(l.tipo)")
+            print("Estaciones operativas: \(l.estacionesOperativasCount)")
+            print("Estaciones proyectadas: \(l.estacionesProyectadasCount)")
+            print("Kilómetros en servicio: \(l.kmOperativos)")
+            print("Recorrido: \(l.recorrido)")
+            print("Cruces/conexiones: \(l.cruceGeneral)")
         } else {
-            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas 1 a 6.")
+            print("Esa línea no existe. El Metro de Lima y Callao solo contempla las líneas válidas.")
         }
         
     } else if opcion == 6 {
@@ -436,10 +374,96 @@ while continuar {
         _ = miTarjeta.pasarPorMolinete()
         
     } else if opcion == 10 {
+        print("\n===== MODO ADMINISTRADOR =====")
+        print("Ingresa la clave de administrador:")
+        let clave = readLine() ?? ""
+        
+        if clave == "admin123" {
+            print("\nAcceso Concedido. ¿Qué deseas realizar?")
+            print("1) Crear una Línea completamente nueva")
+            print("2) Agregar una Estación a una línea existente")
+            print("3) Actualizar la Ruta/Recorrido de una línea")
+            let subOpcion = Int(readLine() ?? "") ?? 0
+            
+            if subOpcion == 1 {
+                print("\n--- CREAR NUEVA LÍNEA ---")
+                print("Número de la nueva línea (ej. 7):")
+                let num = Int(readLine() ?? "") ?? 0
+                print("Estado (ej. Operativa, En proyecto):")
+                let estado = readLine() ?? "En proyecto"
+                print("Tipo (ej. Subterránea, Elevada):")
+                let tipo = readLine() ?? "Por definir"
+                print("Recorrido inicial:")
+                let recorrido = readLine() ?? "Por definir"
+                print("Cruces o interconexiones:")
+                let cruce = readLine() ?? "Sin cruces"
+                
+                let nuevaLinea = Linea(
+                    numero: num,
+                    nombre: "Línea \(num)",
+                    estado: estado,
+                    tipo: tipo,
+                    estacionesOperativasCount: 0,
+                    estacionesProyectadasCount: 0,
+                    kmOperativos: 0.0,
+                    recorrido: recorrido,
+                    cruceGeneral: cruce,
+                    estaciones: []
+                )
+                
+                datosMetro?.lineas.append(nuevaLinea)
+                print("\n [ÉXITO] ¡Línea \(num) creada con éxito!")
+                
+            } else if subOpcion == 2 {
+                print("\n--- AGREGAR NUEVA ESTACIÓN ---")
+                print("Ingresa el número de la línea a modificar:")
+                let numLinea = Int(readLine() ?? "") ?? 0
+                
+                if let index = datosMetro?.lineas.firstIndex(where: { $0.numero == numLinea }) {
+                    print("Nombre de la nueva estación:")
+                    let nombreEst = readLine() ?? "Nueva Estación"
+                    print("Referencia urbana:")
+                    let refEst = readLine() ?? "Sin referencia"
+                    print("¿Tiene conexión con otro transporte? (Enter si no):")
+                    let conInput = readLine() ?? ""
+                    let conEst = conInput.isEmpty ? nil : conInput
+                    
+                    let nuevoID = (datosMetro?.lineas[index].estaciones.count ?? 0) + 1
+                    let nuevaEst = Estacion(id: nuevoID, nombre: nombreEst, referencia: refEst, conexion: conEst)
+                    
+                    datosMetro?.lineas[index].estaciones.append(nuevaEst)
+                    datosMetro?.lineas[index].estacionesOperativasCount += 1
+                    
+                    print("\n [ÉXITO] ¡Estación '\(nombreEst)' agregada a la Línea \(numLinea)!")
+                } else {
+                    print("Línea no encontrada.")
+                }
+                
+            } else if subOpcion == 3 {
+                print("\n--- ACTUALIZAR RUTA/RECORRIDO ---")
+                print("Ingresa el número de la línea a modificar:")
+                let numLinea = Int(readLine() ?? "") ?? 0
+                
+                if let index = datosMetro?.lineas.firstIndex(where: { $0.numero == numLinea }) {
+                    print("Ingresa el nuevo recorrido oficial:")
+                    let nuevoRecorrido = readLine() ?? ""
+                    datosMetro?.lineas[index].recorrido = nuevoRecorrido
+                    
+                    print("\n [ÉXITO] ¡Ruta de la Línea \(numLinea) actualizada!")
+                } else {
+                    print("Línea no encontrada.")
+                }
+            } else {
+                print("Sub-opción no válida.")
+            }
+        } else {
+            print("Clave incorrecta. Acceso denegado.")
+        }
+
+    } else if opcion == 11 {
         print("\n¡Gracias por usar el sistema del Metro de Lima y Callao!")
         continuar = false
     } else {
         print("\n(Opción \(opcion) todavía no implementada)")
     }
 }
-
