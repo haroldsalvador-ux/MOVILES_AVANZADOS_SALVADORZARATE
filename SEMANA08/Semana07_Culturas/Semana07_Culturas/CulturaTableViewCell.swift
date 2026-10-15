@@ -11,6 +11,7 @@ class CulturaTableViewCell: UITableViewCell {
 
     @IBOutlet weak var imgCultura: UIImageView!
     @IBOutlet weak var lblNombre: UILabel!
+    @IBOutlet weak var lblRegion: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -29,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let celda = tableView.dequeueReusableCell(withIdentifier: "celda", for: indexPath) as! CulturaTableViewCell
         let cultura = culturas[indexPath.row]
         celda.lblNombre.text = cultura.nombre
+        celda.lblRegion.text = cultura.region
         celda.imgCultura.image = cultura.foto
         return celda
     }

@@ -12,7 +12,7 @@
         <scene sceneID="NvS-cn-001">
             <objects>
                 <navigationController id="Nav-Cu-001" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NvB-ar-001">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="NvB-ar-001">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -43,7 +43,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Img-ce-001">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="caral" translatesAutoresizingMaskIntoConstraints="NO" id="Img-ce-001">
                                                     <rect key="frame" x="16" y="10" width="90" height="70"/>
                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                     <constraints>
@@ -57,18 +57,28 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Región" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbl-cr-001">
+                                                    <rect key="frame" x="122" y="50" width="224.66666666666669" height="18"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <color key="textColor" systemColor="systemBrownColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="Img-ce-001" firstAttribute="leading" secondItem="CtV-cu-001" secondAttribute="leading" constant="16" id="Cel-c1-001"/>
                                                 <constraint firstItem="Img-ce-001" firstAttribute="centerY" secondItem="CtV-cu-001" secondAttribute="centerY" id="Cel-c2-001"/>
                                                 <constraint firstItem="Lbl-ce-001" firstAttribute="leading" secondItem="Img-ce-001" secondAttribute="trailing" constant="16" id="Cel-c3-001"/>
                                                 <constraint firstAttribute="trailing" secondItem="Lbl-ce-001" secondAttribute="trailing" constant="16" id="Cel-c4-001"/>
-                                                <constraint firstItem="Lbl-ce-001" firstAttribute="centerY" secondItem="CtV-cu-001" secondAttribute="centerY" id="Cel-c5-001"/>
+                                                <constraint firstItem="Lbl-ce-001" firstAttribute="centerY" secondItem="CtV-cu-001" secondAttribute="centerY" constant="-11" id="Cel-c5-001"/>
+                                                <constraint firstItem="Lbl-cr-001" firstAttribute="top" secondItem="Lbl-ce-001" secondAttribute="bottom" constant="4" id="Cel-c6-001"/>
+                                                <constraint firstItem="Lbl-cr-001" firstAttribute="leading" secondItem="Lbl-ce-001" secondAttribute="leading" id="Cel-c7-001"/>
+                                                <constraint firstItem="Lbl-cr-001" firstAttribute="trailing" secondItem="Lbl-ce-001" secondAttribute="trailing" id="Cel-c8-001"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imgCultura" destination="Img-ce-001" id="Out-ce-001"/>
                                             <outlet property="lblNombre" destination="Lbl-ce-001" id="Out-ce-002"/>
+                                            <outlet property="lblRegion" destination="Lbl-cr-001" id="Out-ce-003"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -87,7 +97,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TbV-cu-001" secondAttribute="bottom" id="Tbl-c4-001"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Culturas del Perú" id="NvI-cu-001"/>
+                    <navigationItem key="navigationItem" title="Culturas del Perú" largeTitleDisplayMode="always" id="NvI-cu-001"/>
                     <connections>
                         <outlet property="tablaCulturas" destination="TbV-cu-001" id="Out-vc-001"/>
                         <segue destination="Det-Vc-001" kind="show" identifier="mostrarDetalle" id="Seg-de-001"/>
@@ -105,7 +115,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DtI-mg-001">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nazca" translatesAutoresizingMaskIntoConstraints="NO" id="DtI-mg-001">
                                 <rect key="frame" x="16" y="115" width="120" height="85"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
@@ -142,7 +152,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="215"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Img-el-001">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chimu" translatesAutoresizingMaskIntoConstraints="NO" id="Img-el-001">
                                                     <rect key="frame" x="16" y="12" width="361" height="160"/>
                                                     <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                     <constraints>
@@ -197,7 +207,7 @@
                             <constraint firstItem="DtS-af-001" firstAttribute="bottom" secondItem="TbE-le-001" secondAttribute="bottom" id="Dtc-15-001"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Detalle" id="DtN-it-001"/>
+                    <navigationItem key="navigationItem" title="Detalle" largeTitleDisplayMode="never" id="DtN-it-001"/>
                     <connections>
                         <outlet property="imgCultura" destination="DtI-mg-001" id="DtO-ut-001"/>
                         <outlet property="lblDescripcion" destination="DtL-ds-001" id="DtO-ut-002"/>
@@ -225,7 +235,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ElI-mg-001">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="inca" translatesAutoresizingMaskIntoConstraints="NO" id="ElI-mg-001">
                                 <rect key="frame" x="20" y="166" width="353" height="230"/>
                                 <color key="backgroundColor" systemColor="systemGray5Color"/>
                                 <constraints>
@@ -256,7 +266,7 @@
                             <constraint firstItem="ElS-af-001" firstAttribute="bottom" secondItem="ElT-xt-001" secondAttribute="bottom" id="Elc-10-001"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Detalle" id="ElN-it-001"/>
+                    <navigationItem key="navigationItem" title="Detalle" largeTitleDisplayMode="never" id="ElN-it-001"/>
                     <connections>
                         <outlet property="imgElemento" destination="ElI-mg-001" id="ElO-ut-001"/>
                         <outlet property="lblTitulo" destination="ElL-tt-001" id="ElO-ut-002"/>
@@ -269,6 +279,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="caral" width="640" height="479"/>
+        <image name="chimu" width="950" height="533"/>
+        <image name="inca" width="1200" height="900"/>
+        <image name="nazca" width="810" height="400"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
