@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nav-Cu-001">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="NvS-cn-001">
+            <objects>
+                <navigationController id="Nav-Cu-001" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="NvB-ar-001">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Rel-Ro-001"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NvF-rs-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-700" y="4"/>
+        </scene>
+        <!--Culturas del Perú-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Semana07_Culturas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="90" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="TbV-cu-001">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="celda" rowHeight="90" id="Cel-da-001" customClass="CulturaTableViewCell" customModule="Semana07_Culturas" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cel-da-001" id="CtV-cu-001">
+                                            <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Img-ce-001">
+                                                    <rect key="frame" x="16" y="10" width="90" height="70"/>
+                                                    <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="90" id="Img-wd-001"/>
+                                                        <constraint firstAttribute="height" constant="70" id="Img-ht-001"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cultura" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lbl-ce-001">
+                                                    <rect key="frame" x="122" y="34" width="224.66666666666669" height="22"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Img-ce-001" firstAttribute="leading" secondItem="CtV-cu-001" secondAttribute="leading" constant="16" id="Cel-c1-001"/>
+                                                <constraint firstItem="Img-ce-001" firstAttribute="centerY" secondItem="CtV-cu-001" secondAttribute="centerY" id="Cel-c2-001"/>
+                                                <constraint firstItem="Lbl-ce-001" firstAttribute="leading" secondItem="Img-ce-001" secondAttribute="trailing" constant="16" id="Cel-c3-001"/>
+                                                <constraint firstAttribute="trailing" secondItem="Lbl-ce-001" secondAttribute="trailing" constant="16" id="Cel-c4-001"/>
+                                                <constraint firstItem="Lbl-ce-001" firstAttribute="centerY" secondItem="CtV-cu-001" secondAttribute="centerY" id="Cel-c5-001"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="imgCultura" destination="Img-ce-001" id="Out-ce-001"/>
+                                            <outlet property="lblNombre" destination="Lbl-ce-001" id="Out-ce-002"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="Dsr-tb-001"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Dlg-tb-001"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="TbV-cu-001" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Tbl-c1-001"/>
+                            <constraint firstItem="TbV-cu-001" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Tbl-c2-001"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TbV-cu-001" secondAttribute="trailing" id="Tbl-c3-001"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TbV-cu-001" secondAttribute="bottom" id="Tbl-c4-001"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Culturas del Perú" id="NvI-cu-001"/>
+                    <connections>
+                        <outlet property="tablaCulturas" destination="TbV-cu-001" id="Out-vc-001"/>
+                        <segue destination="Det-Vc-001" kind="show" identifier="mostrarDetalle" id="Seg-de-001"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="130" y="4"/>
+        </scene>
+        <!--Detalle View Controller-->
+        <scene sceneID="DtS-cn-001">
+            <objects>
+                <viewController id="Det-Vc-001" customClass="DetalleViewController" customModule="Semana07_Culturas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DtV-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DtI-mg-001">
+                                <rect key="frame" x="20" y="123" width="353" height="240"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="240" id="DtI-ht-001"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtL-nm-001">
+                                <rect key="frame" x="20" y="383" width="353" height="34"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Región" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtL-rg-001">
+                                <rect key="frame" x="20" y="425" width="353" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <color key="textColor" systemColor="systemBrownColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DtL-ds-001">
+                                <rect key="frame" x="20" y="462" width="353" height="20.333333333333314"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="DtS-af-001"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DtI-mg-001" firstAttribute="top" secondItem="DtS-af-001" secondAttribute="top" constant="20" id="Dtc-01-001"/>
+                            <constraint firstItem="DtI-mg-001" firstAttribute="leading" secondItem="DtS-af-001" secondAttribute="leading" constant="20" id="Dtc-02-001"/>
+                            <constraint firstItem="DtS-af-001" firstAttribute="trailing" secondItem="DtI-mg-001" secondAttribute="trailing" constant="20" id="Dtc-03-001"/>
+                            <constraint firstItem="DtL-nm-001" firstAttribute="top" secondItem="DtI-mg-001" secondAttribute="bottom" constant="20" id="Dtc-04-001"/>
+                            <constraint firstItem="DtL-nm-001" firstAttribute="leading" secondItem="DtI-mg-001" secondAttribute="leading" id="Dtc-05-001"/>
+                            <constraint firstItem="DtL-nm-001" firstAttribute="trailing" secondItem="DtI-mg-001" secondAttribute="trailing" id="Dtc-06-001"/>
+                            <constraint firstItem="DtL-rg-001" firstAttribute="top" secondItem="DtL-nm-001" secondAttribute="bottom" constant="8" id="Dtc-07-001"/>
+                            <constraint firstItem="DtL-rg-001" firstAttribute="leading" secondItem="DtI-mg-001" secondAttribute="leading" id="Dtc-08-001"/>
+                            <constraint firstItem="DtL-rg-001" firstAttribute="trailing" secondItem="DtI-mg-001" secondAttribute="trailing" id="Dtc-09-001"/>
+                            <constraint firstItem="DtL-ds-001" firstAttribute="top" secondItem="DtL-rg-001" secondAttribute="bottom" constant="16" id="Dtc-10-001"/>
+                            <constraint firstItem="DtL-ds-001" firstAttribute="leading" secondItem="DtI-mg-001" secondAttribute="leading" id="Dtc-11-001"/>
+                            <constraint firstItem="DtL-ds-001" firstAttribute="trailing" secondItem="DtI-mg-001" secondAttribute="trailing" id="Dtc-12-001"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detalle" id="DtN-it-001"/>
+                    <connections>
+                        <outlet property="imgCultura" destination="DtI-mg-001" id="DtO-ut-001"/>
+                        <outlet property="lblDescripcion" destination="DtL-ds-001" id="DtO-ut-002"/>
+                        <outlet property="lblNombre" destination="DtL-nm-001" id="DtO-ut-003"/>
+                        <outlet property="lblRegion" destination="DtL-rg-001" id="DtO-ut-004"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DtF-rs-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="960" y="4"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBrownColor">
+            <color red="0.63529411764705879" green="0.51764705882352946" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
