@@ -35,9 +35,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        culturaSeleccionada = culturas[indexPath.row]
+        let cultura = culturas[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        performSegue(withIdentifier: "mostrarDetalle", sender: self)
+
+        let mensaje = "Región: \(cultura.region)\n\n\(cultura.descripcion)"
+        let alerta = UIAlertController(title: cultura.nombre, message: mensaje, preferredStyle: .alert)
+        alerta.addAction(UIAlertAction(title: "Ver lugares", style: .default, handler: { _ in
+            self.culturaSeleccionada = cultura
+            self.performSegue(withIdentifier: "mostrarDetalle", sender: self)
+        }))
+        alerta.addAction(UIAlertAction(title: "Cerrar", style: .cancel, handler: nil))
+        present(alerta, animated: true, completion: nil)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
