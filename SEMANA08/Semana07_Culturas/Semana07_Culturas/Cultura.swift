@@ -12,11 +12,13 @@ class Cultura {
     var region: String
     var descripcion: String
     var foto: UIImage?
+    var elementos: [Elemento]
 
-    init(nombre: String, region: String, descripcion: String, foto: UIImage?) {
+    init(nombre: String, region: String, descripcion: String, foto: UIImage?, elementos: [Elemento] = []) {
         self.nombre = nombre
         self.region = region
         self.descripcion = descripcion
         self.foto = foto
+        self.elementos = elementos
     }
 }
