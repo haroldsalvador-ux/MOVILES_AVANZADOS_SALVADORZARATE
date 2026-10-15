@@ -204,14 +204,74 @@
                         <outlet property="lblNombre" destination="DtL-nm-001" id="DtO-ut-003"/>
                         <outlet property="lblRegion" destination="DtL-rg-001" id="DtO-ut-004"/>
                         <outlet property="tablaElementos" destination="TbE-le-001" id="DtO-ut-005"/>
+                        <segue destination="Ele-Vc-001" kind="show" identifier="mostrarElemento" id="Seg-el-001"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DtF-rs-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="960" y="4"/>
         </scene>
+        <!--Detalle Elemento View Controller-->
+        <scene sceneID="ElS-cn-001">
+            <objects>
+                <viewController id="Ele-Vc-001" customClass="DetalleElementoViewController" customModule="Semana07_Culturas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ElV-vw-001">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ElL-tt-001">
+                                <rect key="frame" x="20" y="119" width="353" height="31"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ElI-mg-001">
+                                <rect key="frame" x="20" y="166" width="353" height="230"/>
+                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="230" id="ElI-ht-001"/>
+                                </constraints>
+                            </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ElT-xt-001">
+                                <rect key="frame" x="16" y="412" width="361" height="406"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <string key="text">Descripción</string>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="ElS-af-001"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ElL-tt-001" firstAttribute="top" secondItem="ElS-af-001" secondAttribute="top" constant="16" id="Elc-01-001"/>
+                            <constraint firstItem="ElL-tt-001" firstAttribute="leading" secondItem="ElS-af-001" secondAttribute="leading" constant="20" id="Elc-02-001"/>
+                            <constraint firstItem="ElS-af-001" firstAttribute="trailing" secondItem="ElL-tt-001" secondAttribute="trailing" constant="20" id="Elc-03-001"/>
+                            <constraint firstItem="ElI-mg-001" firstAttribute="top" secondItem="ElL-tt-001" secondAttribute="bottom" constant="16" id="Elc-04-001"/>
+                            <constraint firstItem="ElI-mg-001" firstAttribute="leading" secondItem="ElL-tt-001" secondAttribute="leading" id="Elc-05-001"/>
+                            <constraint firstItem="ElI-mg-001" firstAttribute="trailing" secondItem="ElL-tt-001" secondAttribute="trailing" id="Elc-06-001"/>
+                            <constraint firstItem="ElT-xt-001" firstAttribute="top" secondItem="ElI-mg-001" secondAttribute="bottom" constant="16" id="Elc-07-001"/>
+                            <constraint firstItem="ElT-xt-001" firstAttribute="leading" secondItem="ElS-af-001" secondAttribute="leading" constant="16" id="Elc-08-001"/>
+                            <constraint firstItem="ElS-af-001" firstAttribute="trailing" secondItem="ElT-xt-001" secondAttribute="trailing" constant="16" id="Elc-09-001"/>
+                            <constraint firstItem="ElS-af-001" firstAttribute="bottom" secondItem="ElT-xt-001" secondAttribute="bottom" id="Elc-10-001"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Detalle" id="ElN-it-001"/>
+                    <connections>
+                        <outlet property="imgElemento" destination="ElI-mg-001" id="ElO-ut-001"/>
+                        <outlet property="lblTitulo" destination="ElL-tt-001" id="ElO-ut-002"/>
+                        <outlet property="txtDescripcion" destination="ElT-xt-001" id="ElO-ut-003"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ElF-rs-001" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1790" y="4"/>
+        </scene>
     </scenes>
     <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

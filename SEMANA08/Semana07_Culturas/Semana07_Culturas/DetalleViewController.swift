@@ -16,6 +16,7 @@ class DetalleViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tablaElementos: UITableView!
 
     var cultura: Cultura?
+    var elementoSeleccionado: Elemento?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +44,19 @@ class DetalleViewController: UIViewController, UITableViewDelegate, UITableViewD
         celda.lblTitulo.text = elemento.titulo
         celda.imgElemento.image = elemento.foto
         return celda
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        elementoSeleccionado = cultura!.elementos[indexPath.row]
+        tableView.deselectRow(at: indexPath, animated: true)
+        performSegue(withIdentifier: "mostrarElemento", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "mostrarElemento" {
+            let detalle = segue.destination as! DetalleElementoViewController
+            detalle.elemento = elementoSeleccionado
+        }
     }
 
 }
