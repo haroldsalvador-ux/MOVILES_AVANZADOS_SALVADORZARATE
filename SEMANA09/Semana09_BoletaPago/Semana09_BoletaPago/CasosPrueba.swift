@@ -24,5 +24,10 @@ let casosPrueba: [CasoPrueba] = [
     // Caso 2 · Con hijos y días incompletos
     CasoPrueba(nombre: "Caso 2",
                datos: DatosTrabajador(sueldoBasico: 1800, diasLaborados: 27, tieneHijos: true, sistema: .onp),
-               netoEsperado: Decimal(string: "1516.41"))
+               netoEsperado: Decimal(string: "1516.41")),
+    // Caso 3 · AFP, horas extras y adelanto
+    CasoPrueba(nombre: "Caso 3",
+               datos: DatosTrabajador(sueldoBasico: 3000, diasLaborados: 30, tieneHijos: true, sistema: .afp,
+                                      nombreAFP: "AFP Ejemplo", horas25: 4, horas35: 4, adelantos: 200),
+               netoEsperado: Decimal(string: "2631.73"))
 ]
