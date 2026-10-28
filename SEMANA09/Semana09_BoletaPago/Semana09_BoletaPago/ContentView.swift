@@ -55,6 +55,11 @@ struct ContentView: View {
                         .background(Color.red.opacity(0.1))
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+
+                // Al pulsar Calcular, la boleta aparece debajo del formulario
+                if let boleta {
+                    BoletaView(boleta: boleta)
+                }
             }
             .padding()
         }
