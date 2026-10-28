@@ -18,6 +18,10 @@ struct ContentView: View {
     @State private var horas35Texto = "0"
     @State private var adelantosTexto = "0"
 
+    // Resultado: la boleta calculada o el mensaje de error
+    @State private var boleta: Boleta?
+    @State private var mensajeError = ""
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 16) {
@@ -31,7 +35,7 @@ struct ContentView: View {
                 formulario
 
                 Button {
-                    // El cálculo se conecta en el siguiente hito
+                    calcular()
                 } label: {
                     Text("Calcular")
                         .font(.headline)
@@ -41,10 +45,36 @@ struct ContentView: View {
                         .foregroundStyle(.white)
                         .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
+
+                // Si los datos no son válidos se muestra el mensaje y no se calcula
+                if !mensajeError.isEmpty {
+                    Text(mensajeError)
+                        .foregroundStyle(.red)
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .background(Color.red.opacity(0.1))
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
             }
             .padding()
         }
         .scrollDismissesKeyboard(.interactively)
+    }
+
+    // MARK: - Calcular
+
+    func calcular() {
+        let resultado = validar(sueldo: sueldoTexto, dias: diasTexto, tieneHijos: tieneHijos,
+                                sistema: sistema, nombreAFP: nombreAFP, horas25: horas25Texto,
+                                horas35: horas35Texto, adelantos: adelantosTexto)
+        switch resultado {
+        case .valido(let datos):
+            mensajeError = ""
+            boleta = Boleta(datos: datos)
+        case .invalido(let mensaje):
+            mensajeError = mensaje
+            boleta = nil
+        }
     }
 
     // MARK: - Formulario
