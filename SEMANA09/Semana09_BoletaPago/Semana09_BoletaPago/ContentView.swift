@@ -21,6 +21,8 @@ struct ContentView: View {
     // Resultado: la boleta calculada o el mensaje de error
     @State private var boleta: Boleta?
     @State private var mensajeError = ""
+    // Caso de prueba cargado (para comparar con la respuesta del enunciado)
+    @State private var casoCargado: CasoPrueba?
 
     var body: some View {
         ScrollView {
@@ -31,6 +33,8 @@ struct ContentView: View {
                 Text("Boleta de ejemplo · datos ficticios")
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
+
+                casos
 
                 formulario
 
@@ -59,6 +63,7 @@ struct ContentView: View {
                 // Al pulsar Calcular, la boleta aparece debajo del formulario
                 if let boleta {
                     BoletaView(boleta: boleta)
+                    verificacion(de: boleta)
                 }
             }
             .padding()
@@ -69,6 +74,7 @@ struct ContentView: View {
     // MARK: - Calcular
 
     func calcular() {
+        casoCargado = nil
         let resultado = validar(sueldo: sueldoTexto, dias: diasTexto, tieneHijos: tieneHijos,
                                 sistema: sistema, nombreAFP: nombreAFP, horas25: horas25Texto,
                                 horas35: horas35Texto, adelantos: adelantosTexto)
@@ -79,6 +85,57 @@ struct ContentView: View {
         case .invalido(let mensaje):
             mensajeError = mensaje
             boleta = nil
+        }
+    }
+
+    // MARK: - Casos de prueba
+
+    var casos: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Cargar caso de prueba").font(.subheadline).bold()
+            HStack {
+                ForEach(casosPrueba) { caso in
+                    Button(caso.nombre) {
+                        cargar(caso)
+                    }
+                    .buttonStyle(.bordered)
+                    .font(.caption)
+                }
+            }
+        }
+    }
+
+    // Copia los datos del caso al formulario y calcula
+    func cargar(_ caso: CasoPrueba) {
+        let datos = caso.datos
+        sueldoTexto = "\(datos.sueldoBasico)"
+        diasTexto = "\(datos.diasLaborados)"
+        tieneHijos = datos.tieneHijos
+        sistema = datos.sistema
+        nombreAFP = datos.nombreAFP
+        horas25Texto = "\(datos.horas25)"
+        horas35Texto = "\(datos.horas35)"
+        adelantosTexto = "\(datos.adelantos)"
+        calcular()
+        casoCargado = caso
+    }
+
+    // Compara el neto calculado con la respuesta del enunciado
+    @ViewBuilder
+    func verificacion(de boleta: Boleta) -> some View {
+        if let caso = casoCargado {
+            if let esperado = caso.netoEsperado {
+                let coincide = boleta.netoAPagar == esperado
+                Text(coincide
+                     ? "✓ \(caso.nombre): coincide con la respuesta del enunciado (S/ \(formatear(esperado)))"
+                     : "✗ \(caso.nombre): se esperaba S/ \(formatear(esperado))")
+                    .font(.footnote)
+                    .foregroundStyle(coincide ? .green : .red)
+            } else {
+                Text("\(caso.nombre): el enunciado no trae respuesta, lo revisa el docente.")
+                    .font(.footnote)
+                    .foregroundStyle(.secondary)
+            }
         }
     }
 
