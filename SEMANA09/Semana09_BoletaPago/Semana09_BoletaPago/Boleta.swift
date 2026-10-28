@@ -64,4 +64,68 @@ class Boleta {
     var totalRemuneraciones: Decimal {
         remuneraciones.reduce(0) { $0 + $1.monto }
     }
+
+    // MARK: - Retenciones / descuentos
+
+    // 13% del total de remuneraciones, solo si está en la ONP
+    var onp: Decimal {
+        datos.sistema == .onp ? redondear(totalRemuneraciones * Parametros.tasaONP) : 0
+    }
+
+    // Tasas de la AFP elegida (nil si está en la ONP)
+    var tasasAFP: TasasAFP? {
+        datos.sistema == .afp ? Parametros.tasasAFP[datos.nombreAFP] : nil
+    }
+
+    // Los tres descuentos de la AFP se calculan sobre el total de remuneraciones
+    var afpFondo: Decimal {
+        guard let tasas = tasasAFP else { return 0 }
+        return redondear(totalRemuneraciones * tasas.fondo)
+    }
+
+    var afpComision: Decimal {
+        guard let tasas = tasasAFP else { return 0 }
+        return redondear(totalRemuneraciones * tasas.comision)
+    }
+
+    var afpSeguro: Decimal {
+        guard let tasas = tasasAFP else { return 0 }
+        return redondear(totalRemuneraciones * tasas.seguro)
+    }
+
+    // Monto ingresado, se resta tal cual
+    var adelantos: Decimal {
+        redondear(datos.adelantos)
+    }
+
+    // Array con los conceptos del bloque Retenciones / Descuentos
+    var descuentos: [Concepto] {
+        [
+            Concepto(nombre: "ONP", monto: onp),
+            Concepto(nombre: "AFP fondo", monto: afpFondo),
+            Concepto(nombre: "AFP comisión", monto: afpComision),
+            Concepto(nombre: "AFP seguro", monto: afpSeguro),
+            Concepto(nombre: "Adelantos", monto: adelantos)
+        ]
+    }
+
+    // Pensión (ONP o AFP) + adelantos
+    var totalDescuentos: Decimal {
+        descuentos.reduce(0) { $0 + $1.monto }
+    }
+
+    // MARK: - Neto y aportes del empleador
+
+    var netoAPagar: Decimal {
+        totalRemuneraciones - totalDescuentos
+    }
+
+    // 9% del total de remuneraciones. Lo paga el empleador: no se descuenta al trabajador
+    var esSalud: Decimal {
+        redondear(totalRemuneraciones * Parametros.tasaEsSalud)
+    }
+
+    var aportaciones: [Concepto] {
+        [Concepto(nombre: "EsSalud (9%)", monto: esSalud)]
+    }
 }
