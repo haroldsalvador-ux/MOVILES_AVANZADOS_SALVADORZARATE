@@ -69,6 +69,7 @@ struct ContentView: View {
                     BoletaView(boleta: boleta,
                                encabezado: Encabezado(razonSocial: razonSocial, trabajador: trabajador))
                     verificacion(de: boleta)
+                    ComparacionView(datos: boleta.datos)
                 }
             }
             .padding()
