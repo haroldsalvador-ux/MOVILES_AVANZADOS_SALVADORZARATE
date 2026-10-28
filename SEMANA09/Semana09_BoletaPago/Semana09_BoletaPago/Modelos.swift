@@ -30,3 +30,9 @@ struct Concepto: Identifiable {
     let nombre: String
     let monto: Decimal
 }
+
+// Encabezado de la boleta (reto). Siempre con datos ficticios
+struct Encabezado {
+    var razonSocial: String
+    var trabajador: String
+}

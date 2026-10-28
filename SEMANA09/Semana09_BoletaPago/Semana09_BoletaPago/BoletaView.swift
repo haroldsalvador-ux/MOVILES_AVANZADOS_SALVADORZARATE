@@ -20,9 +20,24 @@ func formatear(_ monto: Decimal) -> String {
 // La boleta imita las tres columnas del formato real; en el celular van una debajo de otra
 struct BoletaView: View {
     let boleta: Boleta
+    let encabezado: Encabezado
 
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
+            // Encabezado: quién paga, a quién y con qué datos
+            VStack(alignment: .leading, spacing: 4) {
+                Text("BOLETA DE EJEMPLO")
+                    .font(.headline)
+                Text("Razón social: \(encabezado.razonSocial)")
+                Text("Trabajador: \(encabezado.trabajador)")
+                Text("Días laborados: \(boleta.datos.diasLaborados) · Sistema: \(nombreSistema)")
+            }
+            .font(.subheadline)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+            .background(Color.gray.opacity(0.1))
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+
             BloqueView(titulo: "REMUNERACIONES", conceptos: boleta.remuneraciones,
                        nombreTotal: "Total remuneraciones", total: boleta.totalRemuneraciones)
             BloqueView(titulo: "RETENCIONES / DESCUENTOS", conceptos: boleta.descuentos,
@@ -42,6 +57,12 @@ struct BoletaView: View {
             .background(Color.green.opacity(0.15))
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
+    }
+}
+
+extension BoletaView {
+    var nombreSistema: String {
+        boleta.datos.sistema == .onp ? "ONP" : boleta.datos.nombreAFP
     }
 }
 

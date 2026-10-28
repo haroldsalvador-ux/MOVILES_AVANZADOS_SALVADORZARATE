@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    // Encabezado (reto): nombres ficticios
+    @State private var razonSocial = "Empresa Ejemplo S.A.C."
+    @State private var trabajador = "Trabajador de ejemplo"
+
     // Datos del formulario: los TextField guardan texto, luego se convierte a número
     @State private var sueldoTexto = ""
     @State private var diasTexto = "30"
@@ -62,7 +66,8 @@ struct ContentView: View {
 
                 // Al pulsar Calcular, la boleta aparece debajo del formulario
                 if let boleta {
-                    BoletaView(boleta: boleta)
+                    BoletaView(boleta: boleta,
+                               encabezado: Encabezado(razonSocial: razonSocial, trabajador: trabajador))
                     verificacion(de: boleta)
                 }
             }
@@ -143,6 +148,8 @@ struct ContentView: View {
 
     var formulario: some View {
         VStack(alignment: .leading, spacing: 12) {
+            campoTexto("Razón social (ficticia)", texto: $razonSocial)
+            campoTexto("Nombre del trabajador (ficticio)", texto: $trabajador)
             campo("Sueldo básico (S/)", texto: $sueldoTexto, ejemplo: "2500.00")
             campo("Días laborados (1 a 30)", texto: $diasTexto, ejemplo: "30", teclado: .numberPad)
 
@@ -183,6 +190,15 @@ struct ContentView: View {
         .padding()
         .background(Color.gray.opacity(0.1))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+
+    // TextField de texto libre para el encabezado
+    func campoTexto(_ titulo: String, texto: Binding<String>) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text(titulo).font(.subheadline).bold()
+            TextField(titulo, text: texto)
+                .textFieldStyle(.roundedBorder)
+        }
     }
 
     // Un TextField con su etiqueta encima
