@@ -33,6 +33,7 @@ Semana09_BoletaPago/
 │   ├── ContentView.swift              → pantalla única: formulario + botón Calcular
 │   ├── BoletaView.swift               → los tres bloques de la boleta y el neto
 │   └── ComparacionView.swift          → reto: ONP y AFP lado a lado
+├── Semana09_BoletaPagoTests/          → 51 pruebas unitarias (XCTest)
 ├── Excel/Boleta_de_pago_Lab09.xlsx    → hojas Parámetros, Boleta, Casos y Explicación
 └── capturas/
 ```
@@ -78,6 +79,20 @@ Si algún dato no es válido, la app muestra el mensaje en rojo y no calcula.
 | Propio | S/ 1,700 (oferta real) · 30 días · sin hijos · AFP Habitat | 1,481.72 | 1,481.72 | — | ✅ |
 
 Detalle del **caso 4**: sueldo computable 3,360.00 · asignación 123.00 · HE 25% 43.75 · HE 35% 47.25 · total remuneraciones 3,574.00 · AFP fondo 357.40 · comisión 57.18 · seguro 48.25 · adelantos 100.00 · total descuentos 562.83 · **neto 3,011.17** · EsSalud 321.66.
+
+## Pruebas unitarias (XCTest)
+
+El target `Semana09_BoletaPagoTests` tiene **51 pruebas**, todas en verde. Se ejecutan en Xcode con `⌘U`.
+
+| Archivo | Qué verifica |
+|---|---|
+| `ParametrosTests` | RMV, tasas legales y diccionario de AFP (enunciado y SBS) |
+| `RedondeoYFormatoTests` | `redondear()` igual a REDONDEAR de Excel (52.048 → 52.05, 43.9155 → 43.92) y formato 2,500.00 |
+| `RemuneracionesTests` | Sueldo computable, asignación familiar (no se prorratea), valor hora, horas extras y total |
+| `DescuentosTests` | ONP o AFP según el sistema, tasas de cada AFP, adelantos, neto y EsSalud (no se descuenta) |
+| `CasosPruebaTests` | Casos 1 a 4 y el caso propio, concepto por concepto |
+| `ValidacionTests` | Conversión de texto a número y cada mensaje de error |
+| `ComparacionTests` | Reto ONP vs AFP y su conclusión |
 
 ## Niveles de avance
 
