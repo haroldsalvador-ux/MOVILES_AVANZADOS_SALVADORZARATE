@@ -16,11 +16,19 @@ struct ContentView: View {
 
     @State private var alumnoSeleccionado: Alumno?   // Alumno seleccionado en la lista
     @State private var mostrarFormulario = false     // Muestra el formulario de nuevo alumno
+    @State private var alumnoAEditar: Alumno?        // Alumno que se está editando
+    @State private var busqueda = ""                 // Texto de búsqueda
+
+    // Alumnos que coinciden con la búsqueda por apellido
+    private var alumnosFiltrados: [Alumno] {
+        if busqueda.isEmpty { return alumnos }
+        return alumnos.filter { $0.apellido.localizedCaseInsensitiveContains(busqueda) }
+    }
 
     var body: some View {
         NavigationSplitView { // Lista a la izquierda, detalle a la derecha
             List(selection: $alumnoSeleccionado) {
-                ForEach(alumnos) { alumno in
+                ForEach(alumnosFiltrados) { alumno in
                     NavigationLink(value: alumno) {
                         VStack(alignment: .leading) {
                             Text("\(alumno.apellido), \(alumno.nombre)")
@@ -32,10 +40,18 @@ struct ContentView: View {
                 }
                 .onDelete(perform: deleteAlumnos) // Eliminar con swipe o modo edición
             }
+            .searchable(text: $busqueda, prompt: "Buscar por apellido")
             .navigationTitle("Alumnos")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     EditButton()
+                }
+                ToolbarItem {
+                    Button {
+                        asignarCursoDemo()
+                    } label: {
+                        Label("Curso demo", systemImage: "book")
+                    }
                 }
                 ToolbarItem {
                     Button {
@@ -53,6 +69,10 @@ struct ContentView: View {
                     Text("Nombre: \(alumno.nombre)")
                     Text("Apellido: \(alumno.apellido)")
                     Text("DNI: \(alumno.dni)")
+                    Text("Curso: \(alumno.curso?.nombre ?? "Sin curso")")
+                    Button("Editar") {
+                        alumnoAEditar = alumno
+                    }
                 }
                 .padding()
             } else {
@@ -63,21 +83,38 @@ struct ContentView: View {
         .sheet(isPresented: $mostrarFormulario) {
             NuevoAlumnoView()
         }
+        // Formulario de edición
+        .sheet(item: $alumnoAEditar) { alumno in
+            EditarAlumnoView(alumno: alumno)
+        }
     }
 
     // DELETE: eliminar uno o más alumnos desde la lista
     private func deleteAlumnos(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
-                let alumno = alumnos[index]
+                // Los índices de .onDelete son de la lista que se ve en pantalla (la filtrada)
+                let alumno = alumnosFiltrados[index]
                 if alumnoSeleccionado == alumno { alumnoSeleccionado = nil }
                 modelContext.delete(alumno)
             }
+            // El guardado es automático, pero save() lo asegura aunque la app se cierre enseguida
+            try? modelContext.save()
         }
+    }
+
+    // DEMOSTRACIÓN de relación: crea un curso y se lo asigna a todos los alumnos
+    private func asignarCursoDemo() {
+        let curso = Curso(nombre: "Programación en Móviles")
+        modelContext.insert(curso)
+        for alumno in alumnos {
+            alumno.curso = curso
+        }
+        try? modelContext.save()
     }
 }
 
 #Preview {
     ContentView()
-        .modelContainer(for: [Alumno.self], inMemory: true)
+        .modelContainer(for: [Alumno.self, Curso.self], inMemory: true)
 }
