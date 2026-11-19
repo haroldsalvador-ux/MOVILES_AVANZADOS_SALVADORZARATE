@@ -1,51 +1,1486 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Nav-Lg-001">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="25408" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="vc070-sb-0070">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="25407"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Login (A1)-->
-        <scene sceneID="Scl-Lg-001">
+        <!--A1 · Login-->
+        <scene sceneID="sc402-sb-0402">
             <objects>
-                <viewController storyboardIdentifier="Login" id="Vcl-Lg-001" customClass="LoginViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Vwl-Lg-001">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                <viewController storyboardIdentifier="A1" id="vc070-sb-0070" userLabel="A1 · Login" customClass="LoginViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v080-sb-0080">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="Sal-Lg-001"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="v072-sb-0072">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="v071-sb-0071">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v061-sb-0061">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="60"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="60" id="c062-sb-0062"/>
+                                                </constraints>
+                                            </view>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v060-sb-0060">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v053-sb-0053">
+                                                        <rect key="frame" x="0.0" y="0.0" width="88" height="88"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cart.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="v050-sb-0050">
+                                                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="44" id="c051-sb-0051"/>
+                                                                    <constraint firstAttribute="height" constant="44" id="c052-sb-0052"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="88" id="c054-sb-0054"/>
+                                                            <constraint firstAttribute="height" constant="88" id="c055-sb-0055"/>
+                                                            <constraint firstItem="v050-sb-0050" firstAttribute="centerX" secondItem="v053-sb-0053" secondAttribute="centerX" id="c056-sb-0056"/>
+                                                            <constraint firstItem="v050-sb-0050" firstAttribute="centerY" secondItem="v053-sb-0053" secondAttribute="centerY" id="c057-sb-0057"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="44"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ventas" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v058-sb-0058">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="41"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="34"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inicia sesión para continuar" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v059-sb-0059">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Usuario" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v063-sb-0063">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="usuario"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c064-sb-0064"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <connections>
+                                                    <action selector="campoCambio:" destination="vc070-sb-0070" eventType="editingChanged" id="a086-sb-0086"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clave" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v065-sb-0065">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="clave"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c066-sb-0066"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="one-time-code"/>
+                                                <connections>
+                                                    <action selector="campoCambio:" destination="vc070-sb-0070" eventType="editingChanged" id="a087-sb-0087"/>
+                                                </connections>
+                                            </textField>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usuario o clave incorrectos" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v067-sb-0067">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="mensajeError"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v068-sb-0068">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="ingresar"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Ingresar" cornerStyle="large" buttonSize="large">
+                                                    <color key="baseBackgroundColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="ingresar:" destination="vc070-sb-0070" eventType="touchUpInside" id="a088-sb-0088"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v069-sb-0069">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="crearCuenta"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="¿No tienes cuenta? Crear cuenta" cornerStyle="large" buttonSize="large"/>
+                                                <connections>
+                                                    <segue destination="vc019-sb-0019" kind="presentation" id="s089-sb-0089"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="v071-sb-0071" firstAttribute="top" secondItem="g073-sb-0073" secondAttribute="top" constant="20" id="c075-sb-0075"/>
+                                    <constraint firstItem="v071-sb-0071" firstAttribute="leading" secondItem="g073-sb-0073" secondAttribute="leading" constant="20" id="c076-sb-0076"/>
+                                    <constraint firstItem="g073-sb-0073" firstAttribute="trailing" secondItem="v071-sb-0071" secondAttribute="trailing" constant="20" id="c077-sb-0077"/>
+                                    <constraint firstItem="g073-sb-0073" firstAttribute="bottom" secondItem="v071-sb-0071" secondAttribute="bottom" constant="20" id="c078-sb-0078"/>
+                                    <constraint firstItem="v071-sb-0071" firstAttribute="width" secondItem="g074-sb-0074" secondAttribute="width" constant="-40" id="c079-sb-0079"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="g073-sb-0073"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="g074-sb-0074"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g081-sb-0081"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v072-sb-0072" firstAttribute="top" secondItem="g081-sb-0081" secondAttribute="top" id="c082-sb-0082"/>
+                            <constraint firstItem="v072-sb-0072" firstAttribute="leading" secondItem="g081-sb-0081" secondAttribute="leading" id="c083-sb-0083"/>
+                            <constraint firstItem="g081-sb-0081" firstAttribute="trailing" secondItem="v072-sb-0072" secondAttribute="trailing" id="c084-sb-0084"/>
+                            <constraint firstAttribute="bottom" secondItem="v072-sb-0072" secondAttribute="bottom" id="c085-sb-0085"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Ventas" id="Nil-Lg-001"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Frl-Lg-001" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1000" y="0.0"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Scn-Nv-001">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nav-Lg-001" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nbr-Lg-001">
-                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Vcl-Lg-001" kind="relationship" relationship="rootViewController" id="Seg-Lg-001"/>
+                        <outlet property="claveCampo" destination="v065-sb-0065" id="o091-sb-0091"/>
+                        <outlet property="mensajeError" destination="v067-sb-0067" id="o092-sb-0092"/>
+                        <outlet property="usuarioCampo" destination="v063-sb-0063" id="o090-sb-0090"/>
                     </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Frn-Nv-001" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr403-sb-0403" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="100" y="0.0"/>
+            <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--A2 · Crear cuenta-->
+        <scene sceneID="sc404-sb-0404">
+            <objects>
+                <viewController storyboardIdentifier="A2" id="vc019-sb-0019" userLabel="A2 · Crear cuenta" customClass="RegistroViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v029-sb-0029">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="v021-sb-0021">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v020-sb-0020">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v001-sb-0001">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="volverLogin"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="‹ Volver al login" cornerStyle="large" buttonSize="medium"/>
+                                                <connections>
+                                                    <action selector="volver:" destination="vc019-sb-0019" eventType="touchUpInside" id="a035-sb-0035"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crear cuenta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v002-sb-0002">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre completo" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v003-sb-0003">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre completo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v004-sb-0004">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="nombre"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c005-sb-0005"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
+                                                <connections>
+                                                    <action selector="campoCambio:" destination="vc019-sb-0019" eventType="editingChanged" id="a036-sb-0036"/>
+                                                </connections>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Usuario" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v006-sb-0006">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Usuario" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v007-sb-0007">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="usuario"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c008-sb-0008"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no"/>
+                                                <connections>
+                                                    <action selector="campoCambio:" destination="vc019-sb-0019" eventType="editingChanged" id="a037-sb-0037"/>
+                                                    <action selector="usuarioCambio:" destination="vc019-sb-0019" eventType="editingChanged" id="a038-sb-0038"/>
+                                                </connections>
+                                            </textField>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ese usuario ya existe" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v009-sb-0009">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="avisoUsuario"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Clave" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v010-sb-0010">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Clave (mínimo 6 caracteres)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v011-sb-0011">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="clave"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c012-sb-0012"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="one-time-code"/>
+                                                <connections>
+                                                    <action selector="campoCambio:" destination="vc019-sb-0019" eventType="editingChanged" id="a039-sb-0039"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirmar clave" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v013-sb-0013">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="confirmar"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c014-sb-0014"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES" textContentType="one-time-code"/>
+                                                <connections>
+                                                    <action selector="campoCambio:" destination="vc019-sb-0019" eventType="editingChanged" id="a040-sb-0040"/>
+                                                </connections>
+                                            </textField>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rol" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v015-sb-0015">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="v016-sb-0016">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="rol"/>
+                                                <segments>
+                                                    <segment title="Vendedor"/>
+                                                    <segment title="Supervisor"/>
+                                                </segments>
+                                                <connections>
+                                                    <action selector="rolCambio:" destination="vc019-sb-0019" eventType="valueChanged" id="a041-sb-0041"/>
+                                                </connections>
+                                            </segmentedControl>
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mensaje" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v017-sb-0017">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="mensajeError"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v018-sb-0018">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="registrarme"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Registrarme" cornerStyle="large" buttonSize="large">
+                                                    <color key="baseBackgroundColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="registrar:" destination="vc019-sb-0019" eventType="touchUpInside" id="a042-sb-0042"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="v020-sb-0020" firstAttribute="top" secondItem="g022-sb-0022" secondAttribute="top" constant="20" id="c024-sb-0024"/>
+                                    <constraint firstItem="v020-sb-0020" firstAttribute="leading" secondItem="g022-sb-0022" secondAttribute="leading" constant="20" id="c025-sb-0025"/>
+                                    <constraint firstItem="g022-sb-0022" firstAttribute="trailing" secondItem="v020-sb-0020" secondAttribute="trailing" constant="20" id="c026-sb-0026"/>
+                                    <constraint firstItem="g022-sb-0022" firstAttribute="bottom" secondItem="v020-sb-0020" secondAttribute="bottom" constant="20" id="c027-sb-0027"/>
+                                    <constraint firstItem="v020-sb-0020" firstAttribute="width" secondItem="g023-sb-0023" secondAttribute="width" constant="-40" id="c028-sb-0028"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="g022-sb-0022"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="g023-sb-0023"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g030-sb-0030"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v021-sb-0021" firstAttribute="top" secondItem="g030-sb-0030" secondAttribute="top" id="c031-sb-0031"/>
+                            <constraint firstItem="v021-sb-0021" firstAttribute="leading" secondItem="g030-sb-0030" secondAttribute="leading" id="c032-sb-0032"/>
+                            <constraint firstItem="g030-sb-0030" firstAttribute="trailing" secondItem="v021-sb-0021" secondAttribute="trailing" id="c033-sb-0033"/>
+                            <constraint firstAttribute="bottom" secondItem="v021-sb-0021" secondAttribute="bottom" id="c034-sb-0034"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="avisoUsuario" destination="v009-sb-0009" id="o045-sb-0045"/>
+                        <outlet property="claveCampo" destination="v011-sb-0011" id="o046-sb-0046"/>
+                        <outlet property="confirmarCampo" destination="v013-sb-0013" id="o047-sb-0047"/>
+                        <outlet property="mensajeError" destination="v017-sb-0017" id="o049-sb-0049"/>
+                        <outlet property="nombreCampo" destination="v004-sb-0004" id="o043-sb-0043"/>
+                        <outlet property="rolSelector" destination="v016-sb-0016" id="o048-sb-0048"/>
+                        <outlet property="usuarioCampo" destination="v007-sb-0007" id="o044-sb-0044"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr405-sb-0405" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="450" y="0.0"/>
+        </scene>
+        <!--A3 · Productos-->
+        <scene sceneID="sc406-sb-0406">
+            <objects>
+                <tableViewController storyboardIdentifier="A3" id="vc111-sb-0111" userLabel="A3 · Productos" customClass="ProductosViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tv112-sb-0112">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="v113-sb-0113">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v107-sb-0107" customClass="ChipsView" customModule="Ventas" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="36"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="c108-sb-0108"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="v107-sb-0107" firstAttribute="top" secondItem="v113-sb-0113" secondAttribute="top" constant="8" id="c114-sb-0114"/>
+                                <constraint firstItem="v107-sb-0107" firstAttribute="leading" secondItem="v113-sb-0113" secondAttribute="leading" constant="16" id="c115-sb-0115"/>
+                                <constraint firstAttribute="trailing" secondItem="v107-sb-0107" secondAttribute="trailing" constant="16" id="c116-sb-0116"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="v107-sb-0107" secondAttribute="bottom" constant="8" id="c117-sb-0117"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Producto" id="cell098-sb-0098" customClass="ProductoCelda" customModule="Ventas" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cell098-sb-0098" id="cv099-sb-0099">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v097-sb-0097">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v095-sb-0095">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laptop" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v093-sb-0093">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cómputo · S/ 200.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v094-sb-0094">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Stock 40" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v096-sb-0096" customClass="PaddingLabel" customModule="Ventas" customModuleProvider="target">
+                                                    <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                    <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="8"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="v097-sb-0097" firstAttribute="top" secondItem="cv099-sb-0099" secondAttribute="top" constant="10" id="c100-sb-0100"/>
+                                        <constraint firstAttribute="bottom" secondItem="v097-sb-0097" secondAttribute="bottom" constant="10" id="c101-sb-0101"/>
+                                        <constraint firstItem="v097-sb-0097" firstAttribute="leading" secondItem="cv099-sb-0099" secondAttribute="leading" constant="16" id="c102-sb-0102"/>
+                                        <constraint firstAttribute="trailing" secondItem="v097-sb-0097" secondAttribute="trailing" constant="16" id="c103-sb-0103"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="detalle" destination="v094-sb-0094" id="o105-sb-0105"/>
+                                    <outlet property="nombre" destination="v093-sb-0093" id="o104-sb-0104"/>
+                                    <outlet property="stock" destination="v096-sb-0096" id="o106-sb-0106"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vc111-sb-0111" id="o118-sb-0118"/>
+                            <outlet property="delegate" destination="vc111-sb-0111" id="o119-sb-0119"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Productos" id="n120-sb-0120">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="b109-sb-0109">
+                            <connections>
+                                <action selector="nuevo:" destination="vc111-sb-0111" id="a110-sb-0110"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="chips" destination="v107-sb-0107" id="o121-sb-0121"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr407-sb-0407" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="0.0"/>
+        </scene>
+        <!--A4 · Clientes-->
+        <scene sceneID="sc408-sb-0408">
+            <objects>
+                <tableViewController storyboardIdentifier="A4" id="vc148-sb-0148" userLabel="A4 · Clientes" customClass="ClientesViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tv149-sb-0149">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cliente" id="cell135-sb-0135" customClass="ClienteCelda" customModule="Ventas" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cell135-sb-0135" id="cv136-sb-0136">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="v134-sb-0134">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v123-sb-0123">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CV" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v122-sb-0122">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="44" id="c124-sb-0124"/>
+                                                        <constraint firstAttribute="height" constant="44" id="c125-sb-0125"/>
+                                                        <constraint firstItem="v122-sb-0122" firstAttribute="centerX" secondItem="v123-sb-0123" secondAttribute="centerX" id="c126-sb-0126"/>
+                                                        <constraint firstItem="v122-sb-0122" firstAttribute="centerY" secondItem="v123-sb-0123" secondAttribute="centerY" id="c127-sb-0127"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="22"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v130-sb-0130">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Carlos Vega" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v128-sb-0128">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Doc. 41234567" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v129-sb-0129">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="v133-sb-0133">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 448.40" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v131-sb-0131">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Regular" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v132-sb-0132" customClass="PaddingLabel" customModule="Ventas" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                            <color key="backgroundColor" systemColor="systemGrayColor"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="v134-sb-0134" firstAttribute="top" secondItem="cv136-sb-0136" secondAttribute="top" constant="10" id="c137-sb-0137"/>
+                                        <constraint firstAttribute="bottom" secondItem="v134-sb-0134" secondAttribute="bottom" constant="10" id="c138-sb-0138"/>
+                                        <constraint firstItem="v134-sb-0134" firstAttribute="leading" secondItem="cv136-sb-0136" secondAttribute="leading" constant="16" id="c139-sb-0139"/>
+                                        <constraint firstAttribute="trailing" secondItem="v134-sb-0134" secondAttribute="trailing" constant="16" id="c140-sb-0140"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="categoria" destination="v132-sb-0132" id="o145-sb-0145"/>
+                                    <outlet property="documento" destination="v129-sb-0129" id="o143-sb-0143"/>
+                                    <outlet property="iniciales" destination="v122-sb-0122" id="o141-sb-0141"/>
+                                    <outlet property="nombre" destination="v128-sb-0128" id="o142-sb-0142"/>
+                                    <outlet property="total" destination="v131-sb-0131" id="o144-sb-0144"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vc148-sb-0148" id="o150-sb-0150"/>
+                            <outlet property="delegate" destination="vc148-sb-0148" id="o151-sb-0151"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Clientes" id="n152-sb-0152">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="b146-sb-0146">
+                            <connections>
+                                <action selector="nuevo:" destination="vc148-sb-0148" id="a147-sb-0147"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr409-sb-0409" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1350" y="0.0"/>
+        </scene>
+        <!--A5 · Nueva venta-->
+        <scene sceneID="sc410-sb-0410">
+            <objects>
+                <viewController storyboardIdentifier="A5" id="vc178-sb-0178" userLabel="A5 · Nueva venta" customClass="NuevaVentaViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v188-sb-0188">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="v180-sb-0180">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v179-sb-0179">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendedor (automático)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v163-sb-0163">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🔒 Vendedor de la sesión" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v164-sb-0164">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="vendedor"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cliente" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v165-sb-0165">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v166-sb-0166">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="elegirCliente"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Elegir cliente" cornerStyle="large" buttonSize="medium"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elige un cliente" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v167-sb-0167">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Producto" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v168-sb-0168">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v169-sb-0169">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="elegirProducto"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="gray" title="Elegir producto" cornerStyle="large" buttonSize="medium"/>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elige un producto" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v170-sb-0170">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cantidad" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v171-sb-0171">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="v175-sb-0175">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Cantidad" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v172-sb-0172">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="cantidad"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="44" id="c173-sb-0173"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="numberPad"/>
+                                                        <connections>
+                                                            <action selector="cantidadCambio:" destination="vc178-sb-0178" eventType="editingChanged" id="a194-sb-0194"/>
+                                                        </connections>
+                                                    </textField>
+                                                    <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="9999" translatesAutoresizingMaskIntoConstraints="NO" id="v174-sb-0174">
+                                                        <rect key="frame" x="0.0" y="0.0" width="94" height="32"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="stepper"/>
+                                                        <connections>
+                                                            <action selector="stepperCambio:" destination="vc178-sb-0178" eventType="valueChanged" id="a195-sb-0195"/>
+                                                        </connections>
+                                                    </stepper>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Resumen" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v176-sb-0176">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v158-sb-0158">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="130"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v157-sb-0157">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Subtotal: S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v153-sb-0153">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="subtotal"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descuento (0 %): − S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v154-sb-0154">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="descuento"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IGV (18 %): S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v155-sb-0155">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="igv"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total: S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v156-sb-0156">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="total"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="v157-sb-0157" firstAttribute="top" secondItem="v158-sb-0158" secondAttribute="top" constant="12" id="c159-sb-0159"/>
+                                                    <constraint firstItem="v157-sb-0157" firstAttribute="leading" secondItem="v158-sb-0158" secondAttribute="leading" constant="14" id="c160-sb-0160"/>
+                                                    <constraint firstAttribute="trailing" secondItem="v157-sb-0157" secondAttribute="trailing" constant="14" id="c161-sb-0161"/>
+                                                    <constraint firstAttribute="bottom" secondItem="v157-sb-0157" secondAttribute="bottom" constant="12" id="c162-sb-0162"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v177-sb-0177">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="registrarVenta"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="filled" title="Registrar venta" cornerStyle="large" buttonSize="large">
+                                                    <color key="baseBackgroundColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </buttonConfiguration>
+                                                <connections>
+                                                    <action selector="registrar:" destination="vc178-sb-0178" eventType="touchUpInside" id="a196-sb-0196"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="v179-sb-0179" firstAttribute="top" secondItem="g181-sb-0181" secondAttribute="top" constant="20" id="c183-sb-0183"/>
+                                    <constraint firstItem="v179-sb-0179" firstAttribute="leading" secondItem="g181-sb-0181" secondAttribute="leading" constant="20" id="c184-sb-0184"/>
+                                    <constraint firstItem="g181-sb-0181" firstAttribute="trailing" secondItem="v179-sb-0179" secondAttribute="trailing" constant="20" id="c185-sb-0185"/>
+                                    <constraint firstItem="g181-sb-0181" firstAttribute="bottom" secondItem="v179-sb-0179" secondAttribute="bottom" constant="20" id="c186-sb-0186"/>
+                                    <constraint firstItem="v179-sb-0179" firstAttribute="width" secondItem="g182-sb-0182" secondAttribute="width" constant="-40" id="c187-sb-0187"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="g181-sb-0181"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="g182-sb-0182"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g189-sb-0189"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v180-sb-0180" firstAttribute="top" secondItem="g189-sb-0189" secondAttribute="top" id="c190-sb-0190"/>
+                            <constraint firstItem="v180-sb-0180" firstAttribute="leading" secondItem="g189-sb-0189" secondAttribute="leading" id="c191-sb-0191"/>
+                            <constraint firstItem="g189-sb-0189" firstAttribute="trailing" secondItem="v180-sb-0180" secondAttribute="trailing" id="c192-sb-0192"/>
+                            <constraint firstAttribute="bottom" secondItem="v180-sb-0180" secondAttribute="bottom" id="c193-sb-0193"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Nueva venta" id="n197-sb-0197"/>
+                    <connections>
+                        <outlet property="cantidadCampo" destination="v172-sb-0172" id="o203-sb-0203"/>
+                        <outlet property="categoriaEtiqueta" destination="v167-sb-0167" id="o200-sb-0200"/>
+                        <outlet property="clienteBoton" destination="v166-sb-0166" id="o199-sb-0199"/>
+                        <outlet property="descuento" destination="v154-sb-0154" id="o206-sb-0206"/>
+                        <outlet property="igv" destination="v155-sb-0155" id="o207-sb-0207"/>
+                        <outlet property="productoBoton" destination="v169-sb-0169" id="o201-sb-0201"/>
+                        <outlet property="stepper" destination="v174-sb-0174" id="o204-sb-0204"/>
+                        <outlet property="stockEtiqueta" destination="v170-sb-0170" id="o202-sb-0202"/>
+                        <outlet property="subtotal" destination="v153-sb-0153" id="o205-sb-0205"/>
+                        <outlet property="total" destination="v156-sb-0156" id="o208-sb-0208"/>
+                        <outlet property="vendedorEtiqueta" destination="v164-sb-0164" id="o198-sb-0198"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr411-sb-0411" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1800" y="0.0"/>
+        </scene>
+        <!--A6 · Mis ventas-->
+        <scene sceneID="sc412-sb-0412">
+            <objects>
+                <tableViewController storyboardIdentifier="A6" id="vc249-sb-0249" userLabel="A6 · Mis ventas" customClass="MisVentasViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tv250-sb-0250">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="v251-sb-0251">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="140"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v248-sb-0248">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v227-sb-0227">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v213-sb-0213">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v212-sb-0212">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mis ventas de hoy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v209-sb-0209">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v210-sb-0210">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                                                    <accessibility key="accessibilityConfiguration" identifier="indicadorHoy"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v211-sb-0211">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="v212-sb-0212" firstAttribute="top" secondItem="v213-sb-0213" secondAttribute="top" constant="10" id="c214-sb-0214"/>
+                                                        <constraint firstItem="v212-sb-0212" firstAttribute="leading" secondItem="v213-sb-0213" secondAttribute="leading" constant="12" id="c215-sb-0215"/>
+                                                        <constraint firstAttribute="trailing" secondItem="v212-sb-0212" secondAttribute="trailing" constant="12" id="c216-sb-0216"/>
+                                                        <constraint firstAttribute="bottom" secondItem="v212-sb-0212" secondAttribute="bottom" constant="10" id="c217-sb-0217"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v222-sb-0222">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v221-sb-0221">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mis ventas del mes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v218-sb-0218">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v219-sb-0219">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                                                    <accessibility key="accessibilityConfiguration" identifier="indicadorMes"/>
+                                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v220-sb-0220">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="v221-sb-0221" firstAttribute="top" secondItem="v222-sb-0222" secondAttribute="top" constant="10" id="c223-sb-0223"/>
+                                                        <constraint firstItem="v221-sb-0221" firstAttribute="leading" secondItem="v222-sb-0222" secondAttribute="leading" constant="12" id="c224-sb-0224"/>
+                                                        <constraint firstAttribute="trailing" secondItem="v221-sb-0221" secondAttribute="trailing" constant="12" id="c225-sb-0225"/>
+                                                        <constraint firstAttribute="bottom" secondItem="v221-sb-0221" secondAttribute="bottom" constant="10" id="c226-sb-0226"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                        </stackView>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="v247-sb-0247">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="periodo"/>
+                                            <segments>
+                                                <segment title="Todas"/>
+                                                <segment title="Hoy"/>
+                                                <segment title="Mes"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="periodoCambio:" destination="vc249-sb-0249" eventType="valueChanged" id="a256-sb-0256"/>
+                                            </connections>
+                                        </segmentedControl>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="v248-sb-0248" firstAttribute="top" secondItem="v251-sb-0251" secondAttribute="top" constant="8" id="c252-sb-0252"/>
+                                <constraint firstItem="v248-sb-0248" firstAttribute="leading" secondItem="v251-sb-0251" secondAttribute="leading" constant="16" id="c253-sb-0253"/>
+                                <constraint firstAttribute="trailing" secondItem="v248-sb-0248" secondAttribute="trailing" constant="16" id="c254-sb-0254"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="v248-sb-0248" secondAttribute="bottom" constant="8" id="c255-sb-0255"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Venta" id="cell236-sb-0236" customClass="VentaCelda" customModule="Ventas" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cell236-sb-0236" id="cv237-sb-0237">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v235-sb-0235">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v231-sb-0231">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comercial Andina SAC" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v228-sb-0228">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laptop × 2 · 19/11/2026 11:30" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v229-sb-0229">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendedor: Juan Pérez" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v230-sb-0230">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="v234-sb-0234">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 424.80" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v232-sb-0232">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="ANULADA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v233-sb-0233" customClass="PaddingLabel" customModule="Ventas" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                            <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="v235-sb-0235" firstAttribute="top" secondItem="cv237-sb-0237" secondAttribute="top" constant="10" id="c238-sb-0238"/>
+                                        <constraint firstAttribute="bottom" secondItem="v235-sb-0235" secondAttribute="bottom" constant="10" id="c239-sb-0239"/>
+                                        <constraint firstItem="v235-sb-0235" firstAttribute="leading" secondItem="cv237-sb-0237" secondAttribute="leading" constant="16" id="c240-sb-0240"/>
+                                        <constraint firstAttribute="trailing" secondItem="v235-sb-0235" secondAttribute="trailing" constant="16" id="c241-sb-0241"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="anulada" destination="v233-sb-0233" id="o246-sb-0246"/>
+                                    <outlet property="cliente" destination="v228-sb-0228" id="o242-sb-0242"/>
+                                    <outlet property="detalle" destination="v229-sb-0229" id="o243-sb-0243"/>
+                                    <outlet property="total" destination="v232-sb-0232" id="o245-sb-0245"/>
+                                    <outlet property="vendedor" destination="v230-sb-0230" id="o244-sb-0244"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vc249-sb-0249" id="o257-sb-0257"/>
+                            <outlet property="delegate" destination="vc249-sb-0249" id="o258-sb-0258"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Mis ventas" id="n259-sb-0259"/>
+                    <connections>
+                        <outlet property="hoyDetalle" destination="v211-sb-0211" id="o261-sb-0261"/>
+                        <outlet property="hoyValor" destination="v210-sb-0210" id="o260-sb-0260"/>
+                        <outlet property="mesDetalle" destination="v220-sb-0220" id="o263-sb-0263"/>
+                        <outlet property="mesValor" destination="v219-sb-0219" id="o262-sb-0262"/>
+                        <outlet property="periodo" destination="v247-sb-0247" id="o264-sb-0264"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr413-sb-0413" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="0.0" y="800"/>
+        </scene>
+        <!--A7 · Ventas del equipo-->
+        <scene sceneID="sc414-sb-0414">
+            <objects>
+                <tableViewController storyboardIdentifier="A7" id="vc322-sb-0322" userLabel="A7 · Ventas del equipo" customClass="VentasEquipoViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="tv323-sb-0323">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="v324-sb-0324">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="150"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v320-sb-0320">
+                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v316-sb-0316" customClass="ChipsView" customModule="Ventas" customModuleProvider="target">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="36"/>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="c317-sb-0317"/>
+                                            </constraints>
+                                        </view>
+                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="v318-sb-0318">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="32"/>
+                                            <accessibility key="accessibilityConfiguration" identifier="periodo"/>
+                                            <segments>
+                                                <segment title="Todas"/>
+                                                <segment title="Hoy"/>
+                                                <segment title="Mes"/>
+                                            </segments>
+                                            <connections>
+                                                <action selector="periodoCambio:" destination="vc322-sb-0322" eventType="valueChanged" id="a329-sb-0329"/>
+                                            </connections>
+                                        </segmentedControl>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ⓘ El vendedor de cada fila sale de la relación venta ▸ vendedor (Usuario)." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v319-sb-0319">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="v320-sb-0320" firstAttribute="top" secondItem="v324-sb-0324" secondAttribute="top" constant="8" id="c325-sb-0325"/>
+                                <constraint firstItem="v320-sb-0320" firstAttribute="leading" secondItem="v324-sb-0324" secondAttribute="leading" constant="16" id="c326-sb-0326"/>
+                                <constraint firstAttribute="trailing" secondItem="v320-sb-0320" secondAttribute="trailing" constant="16" id="c327-sb-0327"/>
+                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="v320-sb-0320" secondAttribute="bottom" constant="8" id="c328-sb-0328"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Venta" id="cell305-sb-0305" customClass="VentaCelda" customModule="Ventas" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="50" width="375" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cell305-sb-0305" id="cv306-sb-0306">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v304-sb-0304">
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v300-sb-0300">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comercial Andina SAC" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v297-sb-0297">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Laptop × 2 · 19/11/2026 11:30" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v298-sb-0298">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vendedor: Juan Pérez" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v299-sb-0299">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                            <color key="textColor" red="0.17999999999999999" green="0.31" blue="0.56000000000000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="v303-sb-0303">
+                                                    <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 424.80" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v301-sb-0301">
+                                                            <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="ANULADA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v302-sb-0302" customClass="PaddingLabel" customModule="Ventas" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                            <color key="backgroundColor" systemColor="systemRedColor"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="8"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                        </stackView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="v304-sb-0304" firstAttribute="top" secondItem="cv306-sb-0306" secondAttribute="top" constant="10" id="c307-sb-0307"/>
+                                        <constraint firstAttribute="bottom" secondItem="v304-sb-0304" secondAttribute="bottom" constant="10" id="c308-sb-0308"/>
+                                        <constraint firstItem="v304-sb-0304" firstAttribute="leading" secondItem="cv306-sb-0306" secondAttribute="leading" constant="16" id="c309-sb-0309"/>
+                                        <constraint firstAttribute="trailing" secondItem="v304-sb-0304" secondAttribute="trailing" constant="16" id="c310-sb-0310"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="anulada" destination="v302-sb-0302" id="o315-sb-0315"/>
+                                    <outlet property="cliente" destination="v297-sb-0297" id="o311-sb-0311"/>
+                                    <outlet property="detalle" destination="v298-sb-0298" id="o312-sb-0312"/>
+                                    <outlet property="total" destination="v301-sb-0301" id="o314-sb-0314"/>
+                                    <outlet property="vendedor" destination="v299-sb-0299" id="o313-sb-0313"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="vc322-sb-0322" id="o330-sb-0330"/>
+                            <outlet property="delegate" destination="vc322-sb-0322" id="o331-sb-0331"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Ventas" id="n332-sb-0332"/>
+                    <connections>
+                        <outlet property="chips" destination="v316-sb-0316" id="o333-sb-0333"/>
+                        <outlet property="periodo" destination="v318-sb-0318" id="o334-sb-0334"/>
+                        <segue destination="vc274-sb-0274" kind="presentation" identifier="anular" id="s321-sb-0321"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr415-sb-0415" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="450" y="800"/>
+        </scene>
+        <!--A8 · Anular venta-->
+        <scene sceneID="sc416-sb-0416">
+            <objects>
+                <viewController storyboardIdentifier="A8" id="vc274-sb-0274" userLabel="A8 · Anular venta" customClass="AnulacionViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v284-sb-0284">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="v276-sb-0276">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="v275-sb-0275">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Anular venta" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v265-sb-0265">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="34"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v266-sb-0266">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="84"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="resumenAnulacion"/>
+                                                <string key="text">Cliente: Comercial Andina SAC
+Producto: Laptop × 2
+Vendedor: Juan Pérez
+Total: S/ 424.80</string>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se devolverán 2 unidad(es) al stock." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v267-sb-0267">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                                <color key="textColor" systemColor="systemRedColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Motivo (obligatorio)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v268-sb-0268">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Escribe el motivo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v269-sb-0269">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="44"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="motivo"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="44" id="c270-sb-0270"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                                                <connections>
+                                                    <action selector="motivoCambio:" destination="vc274-sb-0274" eventType="editingChanged" id="a290-sb-0290"/>
+                                                </connections>
+                                            </textField>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="v273-sb-0273">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v271-sb-0271">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="cancelarAnulacion"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="gray" title="Cancelar" cornerStyle="large" buttonSize="large"/>
+                                                        <connections>
+                                                            <action selector="cancelar:" destination="vc274-sb-0274" eventType="touchUpInside" id="a291-sb-0291"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v272-sb-0272">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="50"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="anularVenta"/>
+                                                        <state key="normal" title="Button"/>
+                                                        <buttonConfiguration key="configuration" style="filled" title="Anular" cornerStyle="large" buttonSize="large">
+                                                            <color key="baseBackgroundColor" systemColor="systemRedColor"/>
+                                                        </buttonConfiguration>
+                                                        <connections>
+                                                            <action selector="anular:" destination="vc274-sb-0274" eventType="touchUpInside" id="a292-sb-0292"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="v275-sb-0275" firstAttribute="top" secondItem="g277-sb-0277" secondAttribute="top" constant="20" id="c279-sb-0279"/>
+                                    <constraint firstItem="v275-sb-0275" firstAttribute="leading" secondItem="g277-sb-0277" secondAttribute="leading" constant="20" id="c280-sb-0280"/>
+                                    <constraint firstItem="g277-sb-0277" firstAttribute="trailing" secondItem="v275-sb-0275" secondAttribute="trailing" constant="20" id="c281-sb-0281"/>
+                                    <constraint firstItem="g277-sb-0277" firstAttribute="bottom" secondItem="v275-sb-0275" secondAttribute="bottom" constant="20" id="c282-sb-0282"/>
+                                    <constraint firstItem="v275-sb-0275" firstAttribute="width" secondItem="g278-sb-0278" secondAttribute="width" constant="-40" id="c283-sb-0283"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="g277-sb-0277"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="g278-sb-0278"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g285-sb-0285"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v276-sb-0276" firstAttribute="top" secondItem="g285-sb-0285" secondAttribute="top" id="c286-sb-0286"/>
+                            <constraint firstItem="v276-sb-0276" firstAttribute="leading" secondItem="g285-sb-0285" secondAttribute="leading" id="c287-sb-0287"/>
+                            <constraint firstItem="g285-sb-0285" firstAttribute="trailing" secondItem="v276-sb-0276" secondAttribute="trailing" id="c288-sb-0288"/>
+                            <constraint firstAttribute="bottom" secondItem="v276-sb-0276" secondAttribute="bottom" id="c289-sb-0289"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="anularBoton" destination="v272-sb-0272" id="o296-sb-0296"/>
+                        <outlet property="aviso" destination="v267-sb-0267" id="o294-sb-0294"/>
+                        <outlet property="motivoCampo" destination="v269-sb-0269" id="o295-sb-0295"/>
+                        <outlet property="resumen" destination="v266-sb-0266" id="o293-sb-0293"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr417-sb-0417" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="900" y="800"/>
+        </scene>
+        <!--A9 · Resumen-->
+        <scene sceneID="sc418-sb-0418">
+            <objects>
+                <viewController storyboardIdentifier="A9" id="vc375-sb-0375" userLabel="A9 · Resumen" customClass="ResumenViewController" customModule="Ventas" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="v385-sb-0385">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="v377-sb-0377">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v376-sb-0376">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="v356-sb-0356">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hola, Luis Paredes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v354-sb-0354">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="751" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Supervisor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v355-sb-0355" customClass="PaddingLabel" customModule="Ventas" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="80" height="22"/>
+                                                        <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="13"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="8"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v353-sb-0353">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v339-sb-0339">
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v338-sb-0338">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ventas de hoy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v335-sb-0335">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v336-sb-0336">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                                                        <accessibility key="accessibilityConfiguration" identifier="resumenHoy"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v337-sb-0337">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="v338-sb-0338" firstAttribute="top" secondItem="v339-sb-0339" secondAttribute="top" constant="10" id="c340-sb-0340"/>
+                                                            <constraint firstItem="v338-sb-0338" firstAttribute="leading" secondItem="v339-sb-0339" secondAttribute="leading" constant="12" id="c341-sb-0341"/>
+                                                            <constraint firstAttribute="trailing" secondItem="v338-sb-0338" secondAttribute="trailing" constant="12" id="c342-sb-0342"/>
+                                                            <constraint firstAttribute="bottom" secondItem="v338-sb-0338" secondAttribute="bottom" constant="10" id="c343-sb-0343"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v348-sb-0348">
+                                                        <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v347-sb-0347">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                                <subviews>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="N.º de ventas hoy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v344-sb-0344">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v345-sb-0345">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                                                        <accessibility key="accessibilityConfiguration" identifier="resumenNumero"/>
+                                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v346-sb-0346">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                        <nil key="highlightedColor"/>
+                                                                    </label>
+                                                                </subviews>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="v347-sb-0347" firstAttribute="top" secondItem="v348-sb-0348" secondAttribute="top" constant="10" id="c349-sb-0349"/>
+                                                            <constraint firstItem="v347-sb-0347" firstAttribute="leading" secondItem="v348-sb-0348" secondAttribute="leading" constant="12" id="c350-sb-0350"/>
+                                                            <constraint firstAttribute="trailing" secondItem="v347-sb-0347" secondAttribute="trailing" constant="12" id="c351-sb-0351"/>
+                                                            <constraint firstAttribute="bottom" secondItem="v347-sb-0347" secondAttribute="bottom" constant="10" id="c352-sb-0352"/>
+                                                        </constraints>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                <integer key="value" value="12"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v361-sb-0361">
+                                                <rect key="frame" x="0.0" y="0.0" width="160" height="80"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="v360-sb-0360">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ventas del mes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v357-sb-0357">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="S/ 0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v358-sb-0358">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="24"/>
+                                                                <accessibility key="accessibilityConfiguration" identifier="resumenMes"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v359-sb-0359">
+                                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                                <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                                                                <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="v360-sb-0360" firstAttribute="top" secondItem="v361-sb-0361" secondAttribute="top" constant="10" id="c362-sb-0362"/>
+                                                    <constraint firstItem="v360-sb-0360" firstAttribute="leading" secondItem="v361-sb-0361" secondAttribute="leading" constant="12" id="c363-sb-0363"/>
+                                                    <constraint firstAttribute="trailing" secondItem="v360-sb-0360" secondAttribute="trailing" constant="12" id="c364-sb-0364"/>
+                                                    <constraint firstAttribute="bottom" secondItem="v360-sb-0360" secondAttribute="bottom" constant="10" id="c365-sb-0365"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                        <integer key="value" value="12"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Últimos 7 días" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v366-sb-0366">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v367-sb-0367" customClass="GraficoBarras" customModule="Ventas" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="170"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <accessibility key="accessibilityConfiguration" identifier="grafico7dias"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="170" id="c368-sb-0368"/>
+                                                </constraints>
+                                            </view>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ranking de vendedores del mes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v369-sb-0369">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v371-sb-0371">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se llena con las ventas del mes" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v370-sb-0370">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Productos con stock bajo (5 o menos)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v372-sb-0372">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="v374-sb-0374">
+                                                <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Se llena con los productos de stock 5 o menos" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v373-sb-0373">
+                                                        <rect key="frame" x="0.0" y="0.0" width="335" height="21"/>
+                                                        <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
+                                                        <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="v376-sb-0376" firstAttribute="top" secondItem="g378-sb-0378" secondAttribute="top" constant="20" id="c380-sb-0380"/>
+                                    <constraint firstItem="v376-sb-0376" firstAttribute="leading" secondItem="g378-sb-0378" secondAttribute="leading" constant="20" id="c381-sb-0381"/>
+                                    <constraint firstItem="g378-sb-0378" firstAttribute="trailing" secondItem="v376-sb-0376" secondAttribute="trailing" constant="20" id="c382-sb-0382"/>
+                                    <constraint firstItem="g378-sb-0378" firstAttribute="bottom" secondItem="v376-sb-0376" secondAttribute="bottom" constant="20" id="c383-sb-0383"/>
+                                    <constraint firstItem="v376-sb-0376" firstAttribute="width" secondItem="g379-sb-0379" secondAttribute="width" constant="-40" id="c384-sb-0384"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="g378-sb-0378"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="g379-sb-0379"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="g386-sb-0386"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="v377-sb-0377" firstAttribute="top" secondItem="g386-sb-0386" secondAttribute="top" id="c387-sb-0387"/>
+                            <constraint firstItem="v377-sb-0377" firstAttribute="leading" secondItem="g386-sb-0386" secondAttribute="leading" id="c388-sb-0388"/>
+                            <constraint firstItem="g386-sb-0386" firstAttribute="trailing" secondItem="v377-sb-0377" secondAttribute="trailing" id="c389-sb-0389"/>
+                            <constraint firstAttribute="bottom" secondItem="v377-sb-0377" secondAttribute="bottom" id="c390-sb-0390"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Resumen" id="n391-sb-0391"/>
+                    <connections>
+                        <outlet property="grafico" destination="v367-sb-0367" id="o399-sb-0399"/>
+                        <outlet property="hoyDetalle" destination="v337-sb-0337" id="o394-sb-0394"/>
+                        <outlet property="hoyValor" destination="v336-sb-0336" id="o393-sb-0393"/>
+                        <outlet property="mesDetalle" destination="v359-sb-0359" id="o398-sb-0398"/>
+                        <outlet property="mesValor" destination="v358-sb-0358" id="o397-sb-0397"/>
+                        <outlet property="numeroDetalle" destination="v346-sb-0346" id="o396-sb-0396"/>
+                        <outlet property="numeroValor" destination="v345-sb-0345" id="o395-sb-0395"/>
+                        <outlet property="ranking" destination="v371-sb-0371" id="o400-sb-0400"/>
+                        <outlet property="saludo" destination="v354-sb-0354" id="o392-sb-0392"/>
+                        <outlet property="stockBajo" destination="v374-sb-0374" id="o401-sb-0401"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fr419-sb-0419" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1350" y="800"/>
         </scene>
     </scenes>
     <resources>
+        <image name="cart.fill" catalog="system" width="32" height="32"/>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondarySystemBackgroundColor">
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.79607843140000001" green="0.18823529410000001" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.21960784310000001" blue="0.23529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

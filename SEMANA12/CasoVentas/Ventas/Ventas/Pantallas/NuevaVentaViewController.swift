@@ -2,92 +2,38 @@
 //  NuevaVentaViewController.swift
 //  Ventas
 //
-//  A5 · Registrar venta: vendedor de la sesión (no editable), cliente, producto,
-//  cantidad con stepper y stock disponible, resumen calculado y Registrar venta.
+//  A5 · Registrar venta (diseñada en Main.storyboard): vendedor de la sesión (no editable),
+//  cliente, producto, cantidad con stepper y stock disponible, resumen calculado y Registrar venta.
 //
 
 import UIKit
 
 final class NuevaVentaViewController: UIViewController {
 
+    @IBOutlet weak var vendedorEtiqueta: UILabel!
+    @IBOutlet weak var clienteBoton: UIButton!
+    @IBOutlet weak var categoriaEtiqueta: UILabel!
+    @IBOutlet weak var productoBoton: UIButton!
+    @IBOutlet weak var stockEtiqueta: UILabel!
+    @IBOutlet weak var cantidadCampo: UITextField!
+    @IBOutlet weak var stepper: UIStepper!
+    @IBOutlet weak var subtotal: UILabel!
+    @IBOutlet weak var descuento: UILabel!
+    @IBOutlet weak var igv: UILabel!
+    @IBOutlet weak var total: UILabel!
+
     private var cliente: Cliente?
     private var producto: Producto?
 
-    private let vendedorEtiqueta = UI.etiqueta(estilo: .body, negrita: true)
-    private let clienteBoton = UIButton(configuration: .gray())
-    private let categoriaEtiqueta = UI.etiqueta(estilo: .footnote, color: .secondaryLabel)
-    private let productoBoton = UIButton(configuration: .gray())
-    private let stockEtiqueta = UI.etiqueta(estilo: .footnote, color: .secondaryLabel)
-    private let cantidadCampo = UI.campo("Cantidad", id: "cantidad", teclado: .numberPad)
-    private let stepper = UIStepper()
-    private let subtotal = UI.etiqueta()
-    private let descuento = UI.etiqueta()
-    private let igv = UI.etiqueta()
-    private let total = UI.etiqueta(estilo: .title3, negrita: true)
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-
+        UI.prepararFormulario(self)
         // ① vendedor automático
         vendedorEtiqueta.text = "🔒 \(Sesion.shared.usuario?.nombre ?? "")"
-        vendedorEtiqueta.accessibilityIdentifier = "vendedor"
-
-        // ② cliente y ③ producto con menú
-        for (boton, id) in [(clienteBoton, "elegirCliente"), (productoBoton, "elegirProducto")] {
-            boton.showsMenuAsPrimaryAction = true
-            boton.contentHorizontalAlignment = .leading
-            boton.accessibilityIdentifier = id
-            boton.configuration?.cornerStyle = .large
-        }
-
-        // ④ cantidad con stepper
-        stepper.minimumValue = 1
-        stepper.maximumValue = 9999
-        stepper.value = 1
-        stepper.accessibilityIdentifier = "stepper"
-        stepper.addAction(UIAction { [weak self] _ in
-            guard let self else { return }
-            self.cantidadCampo.text = "\(Int(self.stepper.value))"
-            self.actualizarResumen()
-        }, for: .valueChanged)
+        // ② y ③ el menú se abre al tocar el botón
+        clienteBoton.showsMenuAsPrimaryAction = true
+        productoBoton.showsMenuAsPrimaryAction = true
         cantidadCampo.text = "1"
-        cantidadCampo.addAction(UIAction { [weak self] _ in
-            guard let self else { return }
-            if let n = Int(self.cantidadCampo.text ?? ""), n > 0 { self.stepper.value = Double(min(n, 9999)) }
-            self.actualizarResumen()
-        }, for: .editingChanged)
-        let filaCantidad = UI.pila([cantidadCampo, stepper], espacio: 12, eje: .horizontal)
-        filaCantidad.alignment = .center
-
-        // ⑤ resumen calculado
-        subtotal.accessibilityIdentifier = "subtotal"
-        descuento.accessibilityIdentifier = "descuento"
-        igv.accessibilityIdentifier = "igv"
-        total.accessibilityIdentifier = "total"
-        let tarjeta = UI.pila([subtotal, descuento, igv, total], espacio: 6)
-        tarjeta.isLayoutMarginsRelativeArrangement = true
-        tarjeta.layoutMargins = UIEdgeInsets(top: 12, left: 14, bottom: 12, right: 14)
-        tarjeta.backgroundColor = .secondarySystemBackground
-        tarjeta.layer.cornerRadius = 12
-
-        // ⑥ registrar
-        let registrar = UI.boton("Registrar venta", id: "registrarVenta") { [weak self] in self?.registrar() }
-
-        func titulo(_ t: String) -> UILabel { UI.etiqueta(t, estilo: .subheadline, color: .secondaryLabel) }
-        let contenido = UI.pila([
-            titulo("Vendedor (automático)"), vendedorEtiqueta,
-            titulo("Cliente"), clienteBoton, categoriaEtiqueta,
-            titulo("Producto"), productoBoton, stockEtiqueta,
-            titulo("Cantidad"), filaCantidad,
-            titulo("Resumen"), tarjeta, registrar,
-        ], espacio: 6)
-        contenido.setCustomSpacing(16, after: vendedorEtiqueta)
-        contenido.setCustomSpacing(16, after: categoriaEtiqueta)
-        contenido.setCustomSpacing(16, after: stockEtiqueta)
-        contenido.setCustomSpacing(16, after: filaCantidad)
-        contenido.setCustomSpacing(18, after: tarjeta)
-        UI.formulario(en: self, contenido: contenido)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -111,8 +57,20 @@ final class NuevaVentaViewController: UIViewController {
         })
     }
 
+    // ④ cantidad: el stepper y el campo se mantienen iguales
+    @IBAction func stepperCambio(_ sender: UIStepper) {
+        cantidadCampo.text = "\(Int(stepper.value))"
+        actualizarResumen()
+    }
+
+    @IBAction func cantidadCambio(_ sender: UITextField) {
+        if let n = Int(cantidadCampo.text ?? ""), n > 0 { stepper.value = Double(min(n, 9999)) }
+        actualizarResumen()
+    }
+
     private var cantidad: Int { Int(cantidadCampo.text ?? "") ?? 0 }
 
+    /// ⑤ resumen calculado con las reglas de negocio
     private func actualizarResumen() {
         clienteBoton.configuration?.title = cliente?.nombre ?? "Elegir cliente"
         productoBoton.configuration?.title = producto?.nombre ?? "Elegir producto"
@@ -136,7 +94,8 @@ final class NuevaVentaViewController: UIViewController {
         total.text = "Total: \(Formato.soles(montos.total))"
     }
 
-    private func registrar() {
+    // ⑥ registrar
+    @IBAction func registrar(_ sender: UIButton) {
         guard let vendedor = Sesion.shared.usuario else { return }
         view.endEditing(true)
         do {

@@ -23,7 +23,7 @@ final class Sesion {
         cambiarPantallaInicial(PestanasPorRol.crear(para: usuario))
     }
 
-    /// Cierra la sesión y vuelve al login
+    /// Cierra la sesión y vuelve al login (pantalla inicial del storyboard)
     func cerrar() {
         usuario = nil
         let login = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController()!

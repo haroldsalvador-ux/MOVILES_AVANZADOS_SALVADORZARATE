@@ -2,8 +2,8 @@
 //  ResumenViewController.swift
 //  Ventas
 //
-//  A9 · Resumen del supervisor: saludo, indicadores contra el día anterior,
-//  barras de los últimos 7 días, ranking de vendedores del mes y stock bajo.
+//  A9 · Resumen del supervisor (diseñado en Main.storyboard): saludo, indicadores contra
+//  el día anterior, barras de los últimos 7 días, ranking de vendedores del mes y stock bajo.
 //  Todo sale de fetch requests (solo ventas no anuladas).
 //
 
@@ -11,41 +11,21 @@ import UIKit
 
 final class ResumenViewController: UIViewController {
 
-    private let saludo = UI.etiqueta(estilo: .title2, negrita: true)
-    private let rol = UI.insignia(Rol.supervisor, color: .systemPurple)
-    private let ventasHoy = TarjetaIndicador(titulo: "Ventas de hoy", id: "resumenHoy")
-    private let numeroHoy = TarjetaIndicador(titulo: "N.º de ventas hoy", id: "resumenNumero")
-    private let ventasMes = TarjetaIndicador(titulo: "Ventas del mes", id: "resumenMes")
-    private let grafico = GraficoBarras()
-    private let ranking = UI.pila([], espacio: 6)
-    private let stockBajo = UI.pila([], espacio: 6)
+    @IBOutlet weak var saludo: UILabel!
+    @IBOutlet weak var hoyValor: UILabel!
+    @IBOutlet weak var hoyDetalle: UILabel!
+    @IBOutlet weak var numeroValor: UILabel!
+    @IBOutlet weak var numeroDetalle: UILabel!
+    @IBOutlet weak var mesValor: UILabel!
+    @IBOutlet weak var mesDetalle: UILabel!
+    @IBOutlet weak var grafico: GraficoBarras!
+    @IBOutlet weak var ranking: UIStackView!
+    @IBOutlet weak var stockBajo: UIStackView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-
         // ① saludo con nombre y rol
         saludo.text = "Hola, \(Sesion.shared.usuario?.nombre ?? "")"
-        let filaSaludo = UI.pila([saludo, rol], espacio: 8, eje: .horizontal)
-        filaSaludo.alignment = .center
-        rol.setContentHuggingPriority(.required, for: .horizontal)
-
-        // ② indicadores
-        let fila1 = UI.pila([ventasHoy, numeroHoy], espacio: 10, eje: .horizontal)
-        fila1.distribution = .fillEqually
-        grafico.heightAnchor.constraint(equalToConstant: 170).isActive = true
-
-        func seccion(_ titulo: String) -> UILabel { UI.etiqueta(titulo, estilo: .headline) }
-        let contenido = UI.pila([
-            filaSaludo, fila1, ventasMes,
-            seccion("Últimos 7 días"), grafico,
-            seccion("Ranking de vendedores del mes"), ranking,
-            seccion("Productos con stock bajo (5 o menos)"), stockBajo,
-        ], espacio: 10)
-        contenido.setCustomSpacing(18, after: ventasMes)
-        contenido.setCustomSpacing(18, after: grafico)
-        contenido.setCustomSpacing(18, after: ranking)
-        UI.formulario(en: self, contenido: contenido)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -58,21 +38,22 @@ final class ResumenViewController: UIViewController {
         let manana = Fechas.sumarDias(1, a: hoy)
         let ayer = Fechas.sumarDias(-1, a: hoy)
 
+        // ② indicadores contra el día anterior
         let deHoy = Datos.ventasValidas(desde: hoy, hasta: manana)
         let deAyer = Datos.ventasValidas(desde: ayer, hasta: hoy)
         let totalHoy = Datos.sumar(deHoy)
         let totalAyer = Datos.sumar(deAyer)
-        ventasHoy.valor.text = Formato.soles(totalHoy)
+        hoyValor.text = Formato.soles(totalHoy)
         let diferencia = Calculo.redondear(totalHoy - totalAyer)
-        ventasHoy.detalle.text = "\(diferencia >= 0 ? "▲" : "▼") \(Formato.soles(abs(diferencia))) vs. ayer (\(Formato.soles(totalAyer)))"
-        ventasHoy.detalle.textColor = diferencia >= 0 ? .systemGreen : .systemRed
-        numeroHoy.valor.text = "\(deHoy.count)"
-        numeroHoy.detalle.text = "Ayer: \(deAyer.count)"
+        hoyDetalle.text = "\(diferencia >= 0 ? "▲" : "▼") \(Formato.soles(abs(diferencia))) vs. ayer (\(Formato.soles(totalAyer)))"
+        hoyDetalle.textColor = diferencia >= 0 ? .systemGreen : .systemRed
+        numeroValor.text = "\(deHoy.count)"
+        numeroDetalle.text = "Ayer: \(deAyer.count)"
 
         let inicioMes = Fechas.inicioDelMes(Date())
         let delMes = Datos.ventasValidas(desde: inicioMes, hasta: manana)
-        ventasMes.valor.text = Formato.soles(Datos.sumar(delMes))
-        ventasMes.detalle.text = "\(delMes.count) venta(s) desde el día 1"
+        mesValor.text = Formato.soles(Datos.sumar(delMes))
+        mesDetalle.text = "\(delMes.count) venta(s) desde el día 1"
 
         // ③ gráfico de barras de 7 días
         var valores: [Double] = []
@@ -94,9 +75,12 @@ final class ResumenViewController: UIViewController {
         if porVendedor.isEmpty {
             ranking.addArrangedSubview(UI.etiqueta("Aún no hay ventas este mes.", estilo: .subheadline, color: .secondaryLabel))
         }
+        let medallas = ["🥇", "🥈", "🥉"]
         for (i, fila) in porVendedor.enumerated() {
-            let medalla = ["🥇", "🥈", "🥉"].indices.contains(i) ? ["🥇", "🥈", "🥉"][i] : "\(i + 1)."
-            ranking.addArrangedSubview(filaTexto("\(medalla) \(fila.nombre)", "\(Formato.soles(fila.total)) · \(fila.cantidad)"))
+            let puesto = i < medallas.count ? medallas[i] : "\(i + 1)."
+            let derecha = UI.etiqueta("\(Formato.soles(fila.total)) · \(fila.cantidad)", estilo: .subheadline, color: .secondaryLabel)
+            derecha.setContentHuggingPriority(.required, for: .horizontal)
+            ranking.addArrangedSubview(UI.pila([UI.etiqueta("\(puesto) \(fila.nombre)"), derecha]))
         }
 
         // ⑤ productos con stock bajo
@@ -106,17 +90,7 @@ final class ResumenViewController: UIViewController {
             stockBajo.addArrangedSubview(UI.etiqueta("Ningún producto con stock bajo.", estilo: .subheadline, color: .secondaryLabel))
         }
         for p in bajos {
-            let fila = UI.pila([UI.etiqueta(p.nombre ?? ""), UI.insignia("Stock \(p.stock)", color: UI.colorStock(p.stock))], eje: .horizontal)
-            fila.alignment = .center
-            stockBajo.addArrangedSubview(fila)
+            stockBajo.addArrangedSubview(UI.pila([UI.etiqueta(p.nombre ?? ""), UI.insignia("Stock \(p.stock)", color: UI.colorStock(p.stock))]))
         }
-    }
-
-    private func filaTexto(_ izquierda: String, _ derecha: String) -> UIView {
-        let a = UI.etiqueta(izquierda)
-        let b = UI.etiqueta(derecha, estilo: .subheadline, color: .secondaryLabel)
-        b.textAlignment = .right
-        b.setContentHuggingPriority(.required, for: .horizontal)
-        return UI.pila([a, b], espacio: 8, eje: .horizontal)
     }
 }

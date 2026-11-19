@@ -2,42 +2,21 @@
 //  VentaCelda.swift
 //  Ventas
 //
-//  Fila de una venta (Mis ventas y Ventas del equipo). Las anuladas se ven tachadas.
+//  Celda de una venta, diseñada en el storyboard (prototipo "Venta" de Mis ventas
+//  y de Ventas del equipo). Las anuladas se ven tachadas.
 //
 
 import UIKit
 
 final class VentaCelda: UITableViewCell {
-    private let cliente = UI.etiqueta(estilo: .headline)
-    private let detalle = UI.etiqueta(estilo: .footnote, color: .secondaryLabel)
-    private let vendedor = UI.etiqueta(estilo: .footnote, color: UI.azul)
-    private let total = UI.etiqueta(estilo: .headline)
-    private let anulada = UI.insignia("ANULADA", color: .systemRed)
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        selectionStyle = .none
-        total.textAlignment = .right
-        let derecha = UI.pila([total, anulada], espacio: 4)
-        derecha.alignment = .trailing
-        let izquierda = UI.pila([cliente, detalle, vendedor], espacio: 2)
-        let fila = UI.pila([izquierda, derecha], espacio: 8, eje: .horizontal)
-        fila.alignment = .center
-        contentView.addSubview(fila)
-        fila.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            fila.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            fila.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            fila.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            fila.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-        ])
-        derecha.setContentCompressionResistancePriority(.required, for: .horizontal)
-        total.setContentHuggingPriority(.required, for: .horizontal)
-    }
-
-    required init?(coder: NSCoder) { fatalError("init(coder:) no se usa") }
+    @IBOutlet weak var cliente: UILabel!
+    @IBOutlet weak var detalle: UILabel!
+    @IBOutlet weak var vendedor: UILabel!
+    @IBOutlet weak var total: UILabel!
+    @IBOutlet weak var anulada: UILabel!
 
     func mostrar(_ venta: Venta, conVendedor: Bool) {
+        selectionStyle = .none
         let nombre = venta.cliente?.nombre ?? ""
         let montoTexto = Formato.soles(venta.total)
         if venta.anulada {

@@ -2,8 +2,8 @@
 //  ClientesViewController.swift
 //  Ventas
 //
-//  A4 · Clientes: botón +, fila con iniciales, nombre, documento y total comprado;
-//  categoría y total calculados con las ventas no anuladas.
+//  A4 · Clientes (diseñada en Main.storyboard): botón +, fila con iniciales, nombre,
+//  documento y total comprado; categoría y total calculados con las ventas no anuladas.
 //
 
 import UIKit
@@ -15,10 +15,6 @@ final class ClientesViewController: UITableViewController, UISearchResultsUpdati
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(ClienteCelda.self, forCellReuseIdentifier: "Cliente")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(systemItem: .add, primaryAction: UIAction { [weak self] _ in
-            self?.navigationController?.pushViewController(ClienteFormViewController(cliente: nil), animated: true)
-        })
         navigationItem.rightBarButtonItem?.accessibilityIdentifier = "nuevoCliente"
         buscador.searchResultsUpdater = self
         buscador.obscuresBackgroundDuringPresentation = false
@@ -39,6 +35,41 @@ final class ClientesViewController: UITableViewController, UISearchResultsUpdati
         tableView.reloadData()
     }
 
+    @IBAction func nuevo(_ sender: UIBarButtonItem) {
+        pedirDatos(de: nil)
+    }
+
+    /// Crear o editar un cliente con una alerta (todos los roles)
+    private func pedirDatos(de cliente: Cliente?) {
+        var mensaje = "Nombre y documento"
+        if let cliente {
+            let comprado = Datos.totalComprado(cliente)
+            mensaje = "Total comprado: \(Formato.soles(comprado)) · Categoría: \(CategoriaCliente.desde(totalComprado: comprado).rawValue)"
+        }
+        let alerta = UIAlertController(title: cliente == nil ? "Nuevo cliente" : "Editar cliente", message: mensaje, preferredStyle: .alert)
+        alerta.addTextField { $0.placeholder = "Nombre o razón social"; $0.text = cliente?.nombre; $0.accessibilityIdentifier = "clienteNombre" }
+        alerta.addTextField {
+            $0.placeholder = "DNI o RUC"; $0.text = cliente?.documento; $0.keyboardType = .numberPad
+            $0.accessibilityIdentifier = "clienteDocumento"
+        }
+        alerta.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        alerta.addAction(UIAlertAction(title: "Guardar", style: .default) { [weak self, unowned alerta] _ in
+            guard let self else { return }
+            let nombre = (alerta.textFields?[0].text ?? "").trimmingCharacters(in: .whitespaces)
+            let documento = (alerta.textFields?[1].text ?? "").trimmingCharacters(in: .whitespaces)
+            guard !nombre.isEmpty, !documento.isEmpty else {
+                UI.alerta(self, "Datos incompletos", "Escribe el nombre y el documento.")
+                return
+            }
+            let destino = cliente ?? Cliente(context: Datos.contexto)
+            destino.nombre = nombre
+            destino.documento = documento
+            try? Datos.guardar()
+            self.cargar()
+        })
+        present(alerta, animated: true)
+    }
+
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { clientes.count }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -49,7 +80,7 @@ final class ClientesViewController: UITableViewController, UISearchResultsUpdati
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        navigationController?.pushViewController(ClienteFormViewController(cliente: clientes[indexPath.row]), animated: true)
+        pedirDatos(de: clientes[indexPath.row])
     }
 
     // Borrar solo el supervisor; Deny lo impide si el cliente tiene ventas
@@ -69,44 +100,13 @@ final class ClientesViewController: UITableViewController, UISearchResultsUpdati
     }
 }
 
+/// Celda diseñada en el storyboard (prototipo "Cliente")
 final class ClienteCelda: UITableViewCell {
-    private let iniciales = UI.etiqueta(estilo: .headline, color: .white, negrita: true)
-    private let circulo = UIView()
-    private let nombre = UI.etiqueta(estilo: .headline)
-    private let documento = UI.etiqueta(estilo: .subheadline, color: .secondaryLabel)
-    private let total = UI.etiqueta(estilo: .subheadline, negrita: true)
-    private let categoria = UI.insignia("", color: .systemGray)
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        circulo.backgroundColor = UI.azul
-        circulo.layer.cornerRadius = 22
-        circulo.addSubview(iniciales)
-        iniciales.textAlignment = .center
-        iniciales.translatesAutoresizingMaskIntoConstraints = false
-        circulo.translatesAutoresizingMaskIntoConstraints = false
-        total.textAlignment = .right
-        let derecha = UI.pila([total, categoria], espacio: 4)
-        derecha.alignment = .trailing
-        let centro = UI.pila([nombre, documento], espacio: 2)
-        let fila = UI.pila([circulo, centro, derecha], espacio: 12, eje: .horizontal)
-        fila.alignment = .center
-        contentView.addSubview(fila)
-        fila.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            circulo.widthAnchor.constraint(equalToConstant: 44),
-            circulo.heightAnchor.constraint(equalToConstant: 44),
-            iniciales.centerXAnchor.constraint(equalTo: circulo.centerXAnchor),
-            iniciales.centerYAnchor.constraint(equalTo: circulo.centerYAnchor),
-            fila.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            fila.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            fila.leadingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.leadingAnchor),
-            fila.trailingAnchor.constraint(equalTo: contentView.layoutMarginsGuide.trailingAnchor),
-        ])
-        derecha.setContentCompressionResistancePriority(.required, for: .horizontal)
-    }
-
-    required init?(coder: NSCoder) { fatalError("init(coder:) no se usa") }
+    @IBOutlet weak var iniciales: UILabel!
+    @IBOutlet weak var nombre: UILabel!
+    @IBOutlet weak var documento: UILabel!
+    @IBOutlet weak var total: UILabel!
+    @IBOutlet weak var categoria: UILabel!
 
     func mostrar(_ cliente: Cliente) {
         let comprado = Datos.totalComprado(cliente)
@@ -119,50 +119,5 @@ final class ClienteCelda: UITableViewCell {
         categoria.text = cat.rawValue
         categoria.accessibilityIdentifier = "categoria_\(cliente.nombre ?? "")"
         categoria.backgroundColor = cat == .vip ? .systemPurple : (cat == .frecuente ? .systemBlue : .systemGray)
-        categoria.invalidateIntrinsicContentSize()
-    }
-}
-
-/// Crear o editar un cliente
-final class ClienteFormViewController: UIViewController {
-    private let cliente: Cliente?
-    private let nombreCampo = UI.campo("Nombre o razón social", id: "clienteNombre")
-    private let documentoCampo = UI.campo("DNI o RUC", id: "clienteDocumento", teclado: .numberPad)
-
-    init(cliente: Cliente?) {
-        self.cliente = cliente
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) { fatalError("init(coder:) no se usa") }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        title = cliente == nil ? "Nuevo cliente" : "Editar cliente"
-        navigationItem.largeTitleDisplayMode = .never
-        nombreCampo.text = cliente?.nombre
-        documentoCampo.text = cliente?.documento
-        var vistas: [UIView] = [nombreCampo, documentoCampo]
-        if let cliente {
-            let comprado = Datos.totalComprado(cliente)
-            vistas.append(UI.etiqueta("Total comprado: \(Formato.soles(comprado)) · Categoría: \(CategoriaCliente.desde(totalComprado: comprado).rawValue)", estilo: .subheadline, color: .secondaryLabel))
-        }
-        vistas.append(UI.boton("Guardar", id: "guardarCliente") { [weak self] in self?.guardar() })
-        UI.formulario(en: self, contenido: UI.pila(vistas))
-    }
-
-    private func guardar() {
-        let nombre = (nombreCampo.text ?? "").trimmingCharacters(in: .whitespaces)
-        let documento = (documentoCampo.text ?? "").trimmingCharacters(in: .whitespaces)
-        guard !nombre.isEmpty, !documento.isEmpty else {
-            UI.alerta(self, "Datos incompletos", "Escribe el nombre y el documento.")
-            return
-        }
-        let destino = cliente ?? Cliente(context: Datos.contexto)
-        destino.nombre = nombre
-        destino.documento = documento
-        try? Datos.guardar()
-        navigationController?.popViewController(animated: true)
     }
 }

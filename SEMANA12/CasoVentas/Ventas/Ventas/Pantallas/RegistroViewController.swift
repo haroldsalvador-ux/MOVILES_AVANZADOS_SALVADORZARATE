@@ -2,60 +2,48 @@
 //  RegistroViewController.swift
 //  Ventas
 //
-//  A2 · Crear cuenta: nombre, usuario único, clave (mínimo 6) y confirmación, rol.
+//  A2 · Crear cuenta (diseñado en Main.storyboard): nombre, usuario único,
+//  clave (mínimo 6) y su confirmación, rol y Registrarme.
 //
 
 import UIKit
 
 final class RegistroViewController: UIViewController {
 
-    private let nombreCampo = UI.campo("Nombre completo", id: "nombre")
-    private let usuarioCampo = UI.campo("Usuario", id: "usuario")
-    private let avisoUsuario = UI.etiqueta(estilo: .footnote, color: .systemRed)
-    private let claveCampo = UI.campo("Clave (mínimo 6 caracteres)", id: "clave", seguro: true)
-    private let confirmarCampo = UI.campo("Confirmar clave", id: "confirmar", seguro: true)
-    private let rolSelector = UISegmentedControl(items: [Rol.vendedor, Rol.supervisor])
-    private let mensajeError = UI.etiqueta(estilo: .footnote, color: .systemRed)
+    @IBOutlet weak var nombreCampo: UITextField!
+    @IBOutlet weak var usuarioCampo: UITextField!
+    @IBOutlet weak var avisoUsuario: UILabel!
+    @IBOutlet weak var claveCampo: UITextField!
+    @IBOutlet weak var confirmarCampo: UITextField!
+    @IBOutlet weak var rolSelector: UISegmentedControl!
+    @IBOutlet weak var mensajeError: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        title = "Crear cuenta"   // ① con el botón para volver al login
+        UI.prepararFormulario(self)
+    }
 
-        avisoUsuario.accessibilityIdentifier = "avisoUsuario"
-        avisoUsuario.isHidden = true
-        usuarioCampo.addAction(UIAction { [weak self] _ in self?.revisarUsuario() }, for: .editingChanged)
+    /// ① Volver al login (cierra la pantalla presentada)
+    @IBAction func volver(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
 
-        // Al corregir un campo se oculta el mensaje de error anterior
-        for campo in [nombreCampo, usuarioCampo, claveCampo, confirmarCampo] {
-            campo.addAction(UIAction { [weak self] _ in self?.mensajeError.isHidden = true }, for: .editingChanged)
-        }
-        rolSelector.selectedSegmentIndex = 0
-        rolSelector.accessibilityIdentifier = "rol"
-        mensajeError.accessibilityIdentifier = "mensajeError"
+    /// Al corregir un campo se oculta el mensaje de error anterior
+    @IBAction func campoCambio(_ sender: UITextField) {
         mensajeError.isHidden = true
+    }
 
-        let registrarme = UI.boton("Registrarme", id: "registrarme") { [weak self] in self?.registrar() }
-        let contenido = UI.pila([
-            UI.etiqueta("Nombre completo", estilo: .subheadline, color: .secondaryLabel), nombreCampo,
-            UI.etiqueta("Usuario", estilo: .subheadline, color: .secondaryLabel), usuarioCampo, avisoUsuario,
-            UI.etiqueta("Clave", estilo: .subheadline, color: .secondaryLabel), claveCampo, confirmarCampo,
-            UI.etiqueta("Rol", estilo: .subheadline, color: .secondaryLabel), rolSelector,
-            mensajeError, registrarme,
-        ], espacio: 8)
-        contenido.setCustomSpacing(20, after: rolSelector)
-        UI.formulario(en: self, contenido: contenido)
+    @IBAction func rolCambio(_ sender: UISegmentedControl) {
+        view.endEditing(true)
     }
 
     /// ③ Aviso en vivo si el usuario ya existe
-    private func revisarUsuario() {
+    @IBAction func usuarioCambio(_ sender: UITextField) {
         let usuario = (usuarioCampo.text ?? "").trimmingCharacters(in: .whitespaces)
-        let existe = !usuario.isEmpty && Datos.buscarUsuario(usuario) != nil
-        avisoUsuario.text = "Ese usuario ya existe"
-        avisoUsuario.isHidden = !existe
+        avisoUsuario.isHidden = usuario.isEmpty || Datos.buscarUsuario(usuario) == nil
     }
 
-    private func registrar() {
+    @IBAction func registrar(_ sender: UIButton) {
         view.endEditing(true)
         let nombre = (nombreCampo.text ?? "").trimmingCharacters(in: .whitespaces)
         let usuario = (usuarioCampo.text ?? "").trimmingCharacters(in: .whitespaces)

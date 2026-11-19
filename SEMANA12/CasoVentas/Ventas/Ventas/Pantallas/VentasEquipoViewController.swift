@@ -2,34 +2,25 @@
 //  VentasEquipoViewController.swift
 //  Ventas
 //
-//  A7 · Ventas del equipo (supervisor): chips por vendedor, periodo, búsqueda,
-//  nombre del vendedor por la relación venta ▸ vendedor y deslizar para Anular.
-//  A8 · Anulación: alerta con el resumen, motivo obligatorio y botón Anular.
+//  A7 · Ventas del equipo (diseñada en Main.storyboard): chips por vendedor, periodo,
+//  búsqueda, nombre del vendedor por la relación venta ▸ vendedor y deslizar para Anular.
+//  Al deslizar Anular se abre A8 · Anular venta con el segue "anular".
 //
 
 import UIKit
 
 final class VentasEquipoViewController: UITableViewController, UISearchResultsUpdating {
 
+    @IBOutlet weak var chips: ChipsView!
+    @IBOutlet weak var periodo: UISegmentedControl!
+
     private var ventas: [Venta] = []
     private var vendedores: [Usuario] = []
-    private let chips = ChipsView()
-    private let periodo = UISegmentedControl(items: ["Todas", "Hoy", "Mes"])
     private let buscador = UISearchController(searchResultsController: nil)
-    private weak var accionAnular: UIAlertAction?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.register(VentaCelda.self, forCellReuseIdentifier: "Venta")
-
         chips.alCambiar = { [weak self] _ in self?.cargar() }
-        periodo.selectedSegmentIndex = 0
-        periodo.accessibilityIdentifier = "periodo"
-        periodo.addAction(UIAction { [weak self] _ in self?.cargar() }, for: .valueChanged)
-        // ④ nota de la relación
-        let nota = UI.etiqueta("ⓘ El vendedor de cada fila sale de la relación venta ▸ vendedor (Usuario).", estilo: .caption1, color: .secondaryLabel)
-        tableView.tableHeaderView = UI.cabecera(UI.pila([chips, periodo, nota], espacio: 8), alto: 124)
-
         buscador.searchResultsUpdater = self
         buscador.obscuresBackgroundDuringPresentation = false
         buscador.searchBar.placeholder = "Buscar por cliente"
@@ -44,6 +35,8 @@ final class VentasEquipoViewController: UITableViewController, UISearchResultsUp
         if nombres != chips.opciones { chips.opciones = nombres }
         cargar()
     }
+
+    @IBAction func periodoCambio(_ sender: UISegmentedControl) { cargar() }
 
     func updateSearchResults(for searchController: UISearchController) { cargar() }
 
@@ -68,42 +61,18 @@ final class VentasEquipoViewController: UITableViewController, UISearchResultsUp
         let venta = ventas[indexPath.row]
         guard Sesion.shared.esSupervisor, !venta.anulada else { return UISwipeActionsConfiguration(actions: []) }
         let anular = UIContextualAction(style: .destructive, title: "Anular") { [weak self] _, _, listo in
-            self?.pedirMotivo(venta)
+            self?.performSegue(withIdentifier: "anular", sender: venta)
             listo(true)
         }
         anular.image = UIImage(systemName: "xmark.circle")
         return UISwipeActionsConfiguration(actions: [anular])
     }
 
-    // MARK: - A8 · Anulación con motivo
-
-    private func pedirMotivo(_ venta: Venta) {
-        let mensaje = """
-        Cliente: \(venta.cliente?.nombre ?? "")
-        Producto: \(venta.producto?.nombre ?? "") × \(venta.cantidad)
-        Vendedor: \(venta.vendedor?.nombre ?? "")
-        Total: \(Formato.soles(venta.total))
-
-        Se devolverán \(venta.cantidad) unidad(es) al stock.
-        """
-        let alerta = UIAlertController(title: "Anular venta", message: mensaje, preferredStyle: .alert)
-        alerta.addTextField { campo in
-            campo.placeholder = "Motivo (obligatorio)"
-            campo.accessibilityIdentifier = "motivo"
-            campo.addAction(UIAction { [weak self] _ in
-                let texto = (campo.text ?? "").trimmingCharacters(in: .whitespaces)
-                self?.accionAnular?.isEnabled = !texto.isEmpty
-            }, for: .editingChanged)
+    /// Pasa la venta elegida a A8 y recarga la lista cuando se anula
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "anular", let destino = segue.destination as? AnulacionViewController {
+            destino.venta = sender as? Venta
+            destino.alAnular = { [weak self] in self?.cargar() }
         }
-        alerta.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
-        let anular = UIAlertAction(title: "Anular", style: .destructive) { [weak self, weak alerta] _ in
-            let motivo = alerta?.textFields?.first?.text ?? ""
-            try? Datos.anular(venta, motivo: motivo)
-            self?.cargar()
-        }
-        anular.isEnabled = false   // deshabilitado mientras el motivo esté vacío
-        alerta.addAction(anular)
-        accionAnular = anular
-        present(alerta, animated: true)
     }
 }
