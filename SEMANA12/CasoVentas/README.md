@@ -30,14 +30,15 @@ La ruta del archivo SQLite sale en la consola de Xcode: `Base de datos SQLite en
 | | `Datos.swift` | Fetch requests con `NSPredicate`, registrar venta, anular, borrar |
 | | `Sesion.swift` | `static let shared`: usuario conectado, iniciar y cerrar sesión |
 | | `DatosEjemplo.swift` | Datos iniciales si la base está vacía |
+| `Base.lproj/Main.storyboard` | Las 9 pantallas del caso: A1 a A9 | Diseño de cada pantalla, celdas, outlets y actions; segues A1 → A2 y A7 → A8 |
+| `Base.lproj/LaunchScreen.storyboard` | Logo y nombre | Pantalla que iOS muestra mientras abre la app |
 | `Pantallas/` | `LoginViewController` (A1), `RegistroViewController` (A2) | Inicio de sesión y registro |
-| | `PestanasPorRol` | Pestañas según el rol |
-| | `ProductosViewController` (A3), `ClientesViewController` (A4) | Catálogos |
+| | `ProductosViewController` (A3), `ClientesViewController` (A4) | Catálogos; crear y editar con una alerta de campos |
 | | `NuevaVentaViewController` (A5), `MisVentasViewController` (A6) | Pantallas del vendedor |
-| | `VentasEquipoViewController` (A7 y A8), `ResumenViewController` (A9) | Pantallas del supervisor |
-| | `CuentaViewController` | Nombre, usuario, rol y Cerrar sesión |
-| `Componentes/` | Chips, tarjetas, gráfico de barras, formato | Piezas de interfaz reutilizables |
-| `Base.lproj/Main.storyboard` | Navigation Controller y login | Pantalla inicial |
+| | `VentasEquipoViewController` (A7), `AnulacionViewController` (A8), `ResumenViewController` (A9) | Pantallas del supervisor |
+| | `PestanasPorRol` | Arma las pestañas por código según el rol, con las pantallas del storyboard |
+| | `CuentaViewController` | Pestaña Cuenta (por código): nombre, usuario, rol y Cerrar sesión |
+| `Componentes/` | Chips, gráfico de barras, insignias, formato | Piezas de interfaz reutilizables |
 
 ## Reglas de negocio
 
