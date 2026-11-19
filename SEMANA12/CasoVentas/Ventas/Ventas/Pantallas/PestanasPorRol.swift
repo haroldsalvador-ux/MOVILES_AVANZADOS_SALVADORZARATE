@@ -2,44 +2,31 @@
 //  PestanasPorRol.swift
 //  Ventas
 //
-//  Arma el UITabBarController según el rol. Cada pestaña es un UINavigationController
-//  cuya pantalla sale de Main.storyboard por su Storyboard ID (A3, A4, A5, A6, A7, A9).
+//  El UITabBarController "Pestañas por rol" está en Main.storyboard, conectado a
+//  A9, A7, A3, A4, A5 y A6. Cada pestaña tiene un tag:
+//  0 = los dos roles · 1 y 2 = solo Supervisor · 3 y 4 = solo Vendedor.
+//  Antes de mostrarlo se dejan solo las pestañas del rol y se agrega Cuenta.
 //
 
 import UIKit
 
 enum PestanasPorRol {
 
-    static func crear(para usuario: Usuario) -> UITabBarController {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    static func configurar(_ pestanas: UITabBarController, para usuario: Usuario) {
+        let permitidas: Set<Int> = usuario.rol == Rol.supervisor
+            ? [0, 1, 2]   // Resumen, Ventas, Productos, Clientes
+            : [0, 3, 4]   // Productos, Clientes, Venta, Mis ventas
+        let delRol = (pestanas.viewControllers ?? []).filter { permitidas.contains($0.tabBarItem.tag) }
+        let cuenta = CuentaViewController()
+        cuenta.tabBarItem = UITabBarItem(title: "Cuenta", image: UIImage(systemName: "person.crop.circle"), selectedImage: nil)
 
-        func pestana(_ pantalla: UIViewController, _ titulo: String, _ icono: String) -> UINavigationController {
+        // Cada pantalla va dentro de un UINavigationController para tener título, buscador y botón +
+        pestanas.viewControllers = (delRol + [cuenta]).map { pantalla in
             let navegacion = UINavigationController(rootViewController: pantalla)
             navegacion.navigationBar.prefersLargeTitles = true
-            navegacion.tabBarItem = UITabBarItem(title: titulo, image: UIImage(systemName: icono), selectedImage: nil)
+            navegacion.tabBarItem = pantalla.tabBarItem
             return navegacion
         }
-        func pantalla(_ id: String) -> UIViewController { storyboard.instantiateViewController(withIdentifier: id) }
-
-        let barra = UITabBarController()
-        barra.tabBar.tintColor = UI.azul
-        if usuario.rol == Rol.supervisor {
-            barra.viewControllers = [
-                pestana(pantalla("A9"), "Resumen", "chart.bar.fill"),
-                pestana(pantalla("A7"), "Ventas", "list.bullet.rectangle"),
-                pestana(pantalla("A3"), "Productos", "shippingbox"),
-                pestana(pantalla("A4"), "Clientes", "person.2"),
-                pestana(CuentaViewController(), "Cuenta", "person.crop.circle"),
-            ]
-        } else {
-            barra.viewControllers = [
-                pestana(pantalla("A3"), "Productos", "shippingbox"),
-                pestana(pantalla("A4"), "Clientes", "person.2"),
-                pestana(pantalla("A5"), "Venta", "cart.badge.plus"),
-                pestana(pantalla("A6"), "Mis ventas", "list.bullet.rectangle"),
-                pestana(CuentaViewController(), "Cuenta", "person.crop.circle"),
-            ]
-        }
-        return barra
+        pestanas.tabBar.tintColor = UI.azul
     }
 }

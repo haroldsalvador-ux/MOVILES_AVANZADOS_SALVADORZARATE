@@ -23,6 +23,13 @@ final class RegistroViewController: UIViewController {
         UI.prepararFormulario(self)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "entrar", let pestanas = segue.destination as? UITabBarController,
+           let usuario = Sesion.shared.usuario {
+            PestanasPorRol.configurar(pestanas, para: usuario)
+        }
+    }
+
     /// ① Volver al login (cierra la pantalla presentada)
     @IBAction func volver(_ sender: UIButton) {
         dismiss(animated: true)
@@ -71,7 +78,8 @@ final class RegistroViewController: UIViewController {
         let rol = rolSelector.selectedSegmentIndex == 1 ? Rol.supervisor : Rol.vendedor
         do {
             let nuevo = try Datos.registrarUsuario(nombre: nombre, usuario: usuario, clave: clave, rol: rol)
-            Sesion.shared.iniciar(nuevo)   // ⑥ entra directo a la app
+            Sesion.shared.usuario = nuevo
+            performSegue(withIdentifier: "entrar", sender: nil)   // ⑥ entra directo a la app
         } catch {
             mensajeError.text = "No se pudo crear la cuenta."
             mensajeError.isHidden = false

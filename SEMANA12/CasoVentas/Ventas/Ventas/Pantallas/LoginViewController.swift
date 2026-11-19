@@ -3,7 +3,7 @@
 //  Ventas
 //
 //  A1 · Login (diseñado en Main.storyboard): usuario, clave oculta,
-//  mensaje genérico, Ingresar y Crear cuenta (segue que presenta A2).
+//  mensaje genérico, Ingresar (segue entrar a las pestañas) y Crear cuenta (segue a A2).
 //
 
 import UIKit
@@ -40,6 +40,15 @@ class LoginViewController: UIViewController {
             mensajeError.isHidden = false
             return
         }
-        Sesion.shared.iniciar(encontrado)
+        Sesion.shared.usuario = encontrado
+        performSegue(withIdentifier: "entrar", sender: nil)   // A1 → Pestañas
+    }
+
+    /// Antes de entrar se arman las pestañas según el rol del usuario
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "entrar", let pestanas = segue.destination as? UITabBarController,
+           let usuario = Sesion.shared.usuario {
+            PestanasPorRol.configurar(pestanas, para: usuario)
+        }
     }
 }
