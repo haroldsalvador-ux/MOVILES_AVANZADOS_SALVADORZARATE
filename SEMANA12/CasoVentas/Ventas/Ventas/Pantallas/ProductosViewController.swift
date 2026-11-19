@@ -9,7 +9,10 @@
 
 import UIKit
 
-final class ProductosViewController: UITableViewController, UISearchResultsUpdating {
+final class ProductosViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+
+    /// Lista diseñada en el storyboard debajo de la cabecera
+    @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var chips: ChipsView!
 
@@ -100,22 +103,22 @@ final class ProductosViewController: UITableViewController, UISearchResultsUpdat
 
     // MARK: - Tabla
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { productos.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { productos.count }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "Producto", for: indexPath) as! ProductoCelda
         celda.mostrar(productos[indexPath.row])
         celda.selectionStyle = esSupervisor ? .default : .none
         return celda
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if esSupervisor { pedirDatos(de: productos[indexPath.row]) }
     }
 
     // ⑤ deslizar para borrar, solo supervisor
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         guard esSupervisor else { return UISwipeActionsConfiguration(actions: []) }
         let borrar = UIContextualAction(style: .destructive, title: "Borrar") { [weak self] _, _, listo in
             guard let self else { return }

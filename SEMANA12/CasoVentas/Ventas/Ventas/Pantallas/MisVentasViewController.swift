@@ -8,7 +8,10 @@
 
 import UIKit
 
-final class MisVentasViewController: UITableViewController, UISearchResultsUpdating {
+final class MisVentasViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+
+    /// Lista diseñada en el storyboard debajo de la cabecera
+    @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var hoyValor: UILabel!
     @IBOutlet weak var hoyDetalle: UILabel!
@@ -51,20 +54,20 @@ final class MisVentasViewController: UITableViewController, UISearchResultsUpdat
         tableView.reloadData()
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { ventas.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { ventas.count }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "Venta", for: indexPath) as! VentaCelda
         celda.mostrar(ventas[indexPath.row], conVendedor: false)
         return celda
     }
 
     // El vendedor no puede anular: ninguna fila tiene acciones al deslizar
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         UISwipeActionsConfiguration(actions: [])
     }
 
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         ventas.isEmpty ? "No hay ventas para este filtro." : nil
     }
 }

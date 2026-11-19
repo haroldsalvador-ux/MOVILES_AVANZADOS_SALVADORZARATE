@@ -3,7 +3,7 @@
 //  Ventas
 //
 //  A1 · Login (diseñado en Main.storyboard): usuario, clave oculta,
-//  mensaje genérico, Ingresar (segue entrar a las pestañas) y Crear cuenta (segue a A2).
+//  mensaje genérico, Ingresar (segue entrar a las pestañas) y Crear cuenta (segue show a A2).
 //
 
 import UIKit
@@ -16,13 +16,20 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backButtonTitle = "Login"   // botón para volver desde A2
         UI.prepararFormulario(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)   // el login no muestra barra
         claveCampo.text = ""
         mensajeError.isHidden = true
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)   // A2 sí muestra la barra
     }
 
     /// Al escribir se oculta el mensaje de error anterior

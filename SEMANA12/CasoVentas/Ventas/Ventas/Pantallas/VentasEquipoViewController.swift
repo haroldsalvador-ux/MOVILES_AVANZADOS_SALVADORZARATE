@@ -9,7 +9,10 @@
 
 import UIKit
 
-final class VentasEquipoViewController: UITableViewController, UISearchResultsUpdating {
+final class VentasEquipoViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating {
+
+    /// Lista diseñada en el storyboard debajo de la cabecera
+    @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var chips: ChipsView!
     @IBOutlet weak var periodo: UISegmentedControl!
@@ -48,16 +51,16 @@ final class VentasEquipoViewController: UITableViewController, UISearchResultsUp
         tableView.reloadData()
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { ventas.count }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { ventas.count }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "Venta", for: indexPath) as! VentaCelda
         celda.mostrar(ventas[indexPath.row], conVendedor: true)   // ② con el nombre del vendedor
         return celda
     }
 
     // ③ deslizar para Anular (solo ventas vigentes)
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let venta = ventas[indexPath.row]
         guard Sesion.shared.esSupervisor, !venta.anulada else { return UISwipeActionsConfiguration(actions: []) }
         let anular = UIContextualAction(style: .destructive, title: "Anular") { [weak self] _, _, listo in

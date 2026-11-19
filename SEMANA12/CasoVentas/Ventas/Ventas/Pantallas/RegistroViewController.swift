@@ -2,7 +2,8 @@
 //  RegistroViewController.swift
 //  Ventas
 //
-//  A2 · Crear cuenta (diseñado en Main.storyboard): nombre, usuario único,
+//  A2 · Crear cuenta (diseñado en Main.storyboard). ① Título y botón ‹ Login de la barra de navegación.
+//  Nombre, usuario único,
 //  clave (mínimo 6) y su confirmación, rol y Registrarme.
 //
 
@@ -28,11 +29,6 @@ final class RegistroViewController: UIViewController {
            let usuario = Sesion.shared.usuario {
             PestanasPorRol.configurar(pestanas, para: usuario)
         }
-    }
-
-    /// ① Volver al login (cierra la pantalla presentada)
-    @IBAction func volver(_ sender: UIButton) {
-        dismiss(animated: true)
     }
 
     /// Al corregir un campo se oculta el mensaje de error anterior

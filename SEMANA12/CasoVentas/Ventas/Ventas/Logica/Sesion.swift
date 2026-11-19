@@ -24,7 +24,10 @@ final class Sesion {
         let ventana = UIApplication.shared.connectedScenes
             .compactMap { ($0 as? UIWindowScene)?.windows.first }
             .first
-        ventana?.rootViewController?.dismiss(animated: true)
+        let raiz = ventana?.rootViewController
+        raiz?.dismiss(animated: true)
+        // Si se entró desde A2, el Navigation Controller vuelve a A1
+        (raiz as? UINavigationController)?.popToRootViewController(animated: false)
     }
 }
 
